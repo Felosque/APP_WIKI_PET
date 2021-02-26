@@ -8,12 +8,15 @@ public class ServicioPet {
 
     private static final ArrayList <Pet> pets = new ArrayList<Pet>();
 
+    private static int numRegistros = 0;
+
     public ServicioPet() {
 
     }
 
     public static void addPets(Pet pet){
-        pet.setId(pets.size() + 1);
+        numRegistros++;
+        pet.setId(numRegistros);
         pets.add(pet);
     }
 

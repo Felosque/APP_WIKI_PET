@@ -85,6 +85,7 @@
                 >
 
 
+
                 <EditText
                     android:id="@+id/txtFecha"
                     android:layout_width="350dp"

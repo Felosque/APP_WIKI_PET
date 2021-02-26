@@ -76,7 +76,7 @@ public class GUIAdicionar extends AppCompatActivity {
 
             nombre.setText("");
             descripcion.setText("");
-            altura.setText("0.0");
+            altura.setText("");
             spnTipo.setSelection(0);
 
         }catch (Exception e){
