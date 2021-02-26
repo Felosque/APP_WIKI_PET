@@ -9,15 +9,23 @@ public class Pet {
     private Date discoveredDate;
     private String description;
     private double height;
-    private ANIMAL_TYPE animalType;
+    private String animalType;
 
-    public Pet(int id, String name, Date discoveredDate, String description, double height, Pet.ANIMAL_TYPE animalType) {
+    public Pet(int id, String name, Date discoveredDate, String description, double height, String animalType) {
         this.name = name;
         this.discoveredDate = discoveredDate;
         this.description = description;
         this.height = height;
         this.animalType = animalType;
         this.id = id;
+    }
+
+    public Pet(String name, Date discoveredDate, String description, double height, String animalType) {
+        this.name = name;
+        this.discoveredDate = discoveredDate;
+        this.description = description;
+        this.height = height;
+        this.animalType = animalType;
     }
 
     public int getId() {
@@ -60,11 +68,11 @@ public class Pet {
         this.height = height;
     }
 
-    public ANIMAL_TYPE getAnimalType() {
+    public String getAnimalType() {
         return animalType;
     }
 
-    public void setAnimalType(ANIMAL_TYPE animalType) {
+    public void setAnimalType(String animalType) {
         this.animalType = animalType;
     }
 

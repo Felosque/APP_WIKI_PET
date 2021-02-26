@@ -6,7 +6,7 @@
     <string name="txt_RegistrarEstudiante">REGISTRAR MASCOTA</string>
     <string name="btn_volverText">VOLVER</string>
     <string name="txt_editar_Text">EDITAR MASCOTA</string>
-    <string name="txt_listar_text">LISTAR MASCOTA</string>
+    <string name="txt_listar_text">LISTAR MASCOTAS</string>
     <string name="txtRegistrar">REGISTRAR</string>
     <string name="txtEliminar">ELIMINAR</string>
     <string name="txtSalir">SALIR</string>

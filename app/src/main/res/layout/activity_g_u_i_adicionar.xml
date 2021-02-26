@@ -90,17 +90,19 @@
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:enabled="false"
                     android:inputType="textPersonName"
-                    android:text="26/03/2021"
-                    android:enabled="false"/>
+                    android:onClick="btnFecha_Clic"
+                    android:text="26/03/2021" />
 
                 <ImageButton
                     android:id="@+id/btnFecha"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="fitCenter"
                     android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:onClick="btnFecha_Clic"
+                    android:scaleType="fitCenter"
                     app:srcCompat="@mipmap/calendario" />
 
 
@@ -125,8 +127,27 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:hint="Ingrese la altura del animal"
-                android:inputType="textMultiLine"
+                android:inputType="numberDecimal"
                 android:text="" />
+
+            <TextView
+                android:id="@+id/textTipo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Tipo de animal:"
+                android:textAlignment="viewStart"
+                android:layout_marginStart="10dp"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spTipo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"/>
 
             <TextView
                 android:id="@+id/textDescripcion"
@@ -154,8 +175,10 @@
 
             <Button
                 android:id="@+id/btnRegistrarEstudiante"
-                android:layout_width="119dp"
-                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginTop="12dp"
                 android:layout_gravity="center"
                 android:onClick="btnRegitrar_Click"
@@ -167,8 +190,11 @@
 
             <Button
                 android:id="@+id/btnVolver"
-                android:layout_width="119dp"
-                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
                 android:layout_marginTop="12dp"
                 android:onClick="btnVolver_Click"
                 android:text="@string/btn_volverText"
