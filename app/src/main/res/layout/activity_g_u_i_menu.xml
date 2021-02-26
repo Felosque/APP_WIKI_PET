@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GUIMenu">
+
+    <TextView
+        android:id="@+id/txtSalir"
+        android:layout_width="101dp"
+        android:layout_height="18dp"
+        android:text="@string/txtSalir"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.59"
+        app:layout_constraintStart_toEndOf="@+id/txtList"
+        app:layout_constraintTop_toBottomOf="@+id/btnExit" />
+
+    <TextView
+        android:id="@+id/txtList"
+        android:layout_width="101dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="60dp"
+        android:text="@string/txtListar"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnList" />
+
+    <TextView
+        android:id="@+id/txtEdit"
+        android:layout_width="101dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="88dp"
+        android:text="@string/txtEditar"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/txtBuscar"
+        app:layout_constraintTop_toBottomOf="@+id/btnEdit" />
+
+    <TextView
+        android:id="@+id/txtBuscar"
+        android:layout_width="101dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="60dp"
+        android:text="@string/txtBuscar"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnChos" />
+
+    <ImageButton
+        android:id="@+id/btnExit"
+        android:layout_width="101dp"
+        android:layout_height="117dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#003F51B5"
+        android:onClick="btnVolver_Click"
+        android:scaleType="centerInside"
+        android:src="@mipmap/img_salir"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.59"
+        app:layout_constraintStart_toEndOf="@+id/btnList"
+        app:layout_constraintTop_toBottomOf="@+id/txtEdit"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageButton
+        android:id="@+id/btnChos"
+        android:layout_width="101dp"
+        android:layout_height="115dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#003F51B5"
+        android:onClick="btnBuscar_Click"
+        android:scaleType="centerInside"
+        android:src="@mipmap/img_buscar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtRegistrar"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageButton
+        android:id="@+id/btnEdit"
+        android:layout_width="101dp"
+        android:layout_height="115dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#003F51B5"
+        android:onClick="btnEditar_Click"
+        android:scaleType="centerInside"
+        android:src="@mipmap/img_editar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.59"
+        app:layout_constraintStart_toEndOf="@+id/btnChos"
+        app:layout_constraintTop_toBottomOf="@+id/txtElimnar"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/txtMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="@string/txtMenu"
+        android:textAlignment="center"
+        android:textColor="@color/purple_500"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnList"
+        android:layout_width="101dp"
+        android:layout_height="115dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#003F51B5"
+        android:onClick="btnListar_Click"
+        android:scaleType="centerInside"
+        android:src="@mipmap/img_listar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtBuscar"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageButton
+        android:id="@+id/btnDel"
+        android:layout_width="101dp"
+        android:layout_height="115dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#003F51B5"
+        android:onClick="btnDel_Click"
+        android:scaleType="centerInside"
+        android:src="@mipmap/img_eliminar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/btnAdd"
+        app:layout_constraintTop_toBottomOf="@+id/txtMenu"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/txtRegistrar"
+        android:layout_width="101dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="60dp"
+        android:text="@string/txtRegistrar"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAdd" />
+
+    <TextView
+        android:id="@+id/txtElimnar"
+        android:layout_width="101dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="88dp"
+        android:text="@string/txtEliminar"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/txtRegistrar"
+        app:layout_constraintTop_toBottomOf="@+id/btnDel" />
+
+    <ImageButton
+        android:id="@+id/btnAdd"
+        android:layout_width="101dp"
+        android:layout_height="115dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#003F51B5"
+        android:onClick="btnAdd_Click"
+        android:scaleType="centerInside"
+        android:src="@mipmap/img_agregar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtMenu"
+        tools:srcCompat="@tools:sample/avatars" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

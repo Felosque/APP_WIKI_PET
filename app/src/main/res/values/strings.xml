@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">WIKI PETS</string>
+    <string name="txtMenu">Menú Principal</string>
+    <string name="btn_Ingresar_Text">Ingresar</string>
+    <string name="txtRegistrarse_Text">Registrarse</string>
+    <string name="txt_RegistrarEstudiante">REGISTRAR MASCOTA</string>
+    <string name="btn_volverText">VOLVER</string>
+    <string name="txt_editar_Text">EDITAR MASCOTA</string>
+    <string name="txt_listar_text">LISTAR MASCOTA</string>
+    <string name="txtRegistrar">REGISTRAR</string>
+    <string name="txtEliminar">ELIMINAR</string>
+    <string name="txtSalir">SALIR</string>
+    <string name="txtListar">LISTAR</string>
+    <string name="txtEditar">EDITAR</string>
+    <string name="txtBuscar">BUSCAR</string>
+    <string name="btnRegistar_Text">Registrar</string>
+    <string name="txtIdentificacion_Text">N° Identificación</string>
+    <string name="txtNombres_Text">Nombres</string>
+    <string name="txtApellido_Text">Apellidos</string>
+    <string name="txtCodigo_Text">Código</string>
+    <string name="buscar_estudiante">BUSCAR MASCOTA</string>
+    <string name="buscar">Buscar</string>
+    <string name="c_digo">Código</string>
+</resources>
