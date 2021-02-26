@@ -7,9 +7,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.wikipets.estructural.Estudiante;
-import com.example.wikipets.servicios.ServicioEstudiantes;
-
 public class GUIBuscar extends AppCompatActivity {
 
     private TextView txtCodigo;
@@ -27,7 +24,7 @@ public class GUIBuscar extends AppCompatActivity {
     public void btnBuscar_Click (View view) {
 
         try {
-            Estudiante busqueda = ServicioEstudiantes.buscarEstudiante(txtCodigo.getText().toString());
+            /*Estudiante busqueda = ServicioEstudiantes.buscarEstudiante(txtCodigo.getText().toString());
             if (busqueda != null){
                 String txtBusqueda = "Estudiante: \n" +
                                     "Código: " + busqueda.getCodigo() + "\n"+
@@ -38,7 +35,7 @@ public class GUIBuscar extends AppCompatActivity {
             }else {
                 txtMultiLine.setText("");
                 Toast.makeText(this, "No se encontró ningún estudiante.", Toast.LENGTH_LONG ).show();
-            }
+            }*/
         }catch (Exception e){
             Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG ).show();
         }

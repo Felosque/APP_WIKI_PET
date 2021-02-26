@@ -9,9 +9,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import com.example.wikipets.estructural.Estudiante;
-import com.example.wikipets.servicios.ServicioEstudiantes;
-
 public class GUIListar extends AppCompatActivity {
 
     private TextView lista;
@@ -26,7 +23,7 @@ public class GUIListar extends AppCompatActivity {
 
     public void btnListar_Click (View view){
         try {
-            ArrayList<Estudiante> busqueda = ServicioEstudiantes.darEstudiantes();
+            /*ArrayList<Estudiante> busqueda = ServicioEstudiantes.darEstudiantes();
             if (busqueda != null){
                 String txtBusqueda = "";
                 for (int i = 0; i < busqueda.size(); i++){
@@ -40,7 +37,7 @@ public class GUIListar extends AppCompatActivity {
             }else {
                 lista.setText("");
                 Toast.makeText(this, "No se encontró ningún estudiante.", Toast.LENGTH_LONG ).show();
-            }
+            }*/
         }catch (Exception e){
             Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG ).show();
         }

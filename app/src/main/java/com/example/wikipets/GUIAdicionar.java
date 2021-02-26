@@ -7,9 +7,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.wikipets.estructural.Estudiante;
-import com.example.wikipets.servicios.ServicioEstudiantes;
-
 public class GUIAdicionar extends AppCompatActivity {
 
     private TextView codigo;
@@ -36,10 +33,7 @@ public class GUIAdicionar extends AppCompatActivity {
             if(nombres.getText().toString().isEmpty()) {Toast.makeText(this, "El nombre no puede estar vacío.", Toast.LENGTH_LONG).show(); return;}
             if(apellidos.getText().toString().isEmpty()) {Toast.makeText(this, "El apellido no puede estar vacío.", Toast.LENGTH_LONG).show(); return;}
 
-            Estudiante est = new Estudiante(codigo.getText().toString(), identificacion.getText().toString(), nombres.getText().toString(), apellidos.getText().toString());
-            ServicioEstudiantes.agregarEstudiante(est);
-            Toast.makeText(this, "Se registró el estudiante correctamente", Toast.LENGTH_LONG).show();
-            codigo.setText(""); identificacion.setText(""); nombres.setText(""); apellidos.setText("");
+
         }catch (Exception e){
             Toast.makeText(this, "Error al registrar estudiante " + e.getMessage(), Toast.LENGTH_LONG).show();
         }

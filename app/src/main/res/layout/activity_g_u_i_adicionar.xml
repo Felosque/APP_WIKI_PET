@@ -1,115 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".GUIAdicionar">
 
-    <TextView
-        android:id="@+id/txtTituloAdicionar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:lineSpacingExtra="8sp"
-        android:text="@string/txt_RegistrarEstudiante"
-        android:textAlignment="center"
-        android:textColor="@color/green"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="131dp"
-        android:layout_height="124dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/img_agregar" />
-
-
-
-    <Button
-        android:id="@+id/btnVolver"
-        android:layout_width="119dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="12dp"
-        android:onClick="btnVolver_Click"
-        android:text="@string/btn_volverText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegistrarEstudiante" />
-
-    <Button
-        android:id="@+id/btnRegistrarEstudiante"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:onClick="btnRegitrar_Click"
-        android:text="@string/btnRegistar_Text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtApellidos" />
-
-    <EditText
-        android:id="@+id/txtCodigo"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/txtCodigo_Text"
-        android:inputType="textPersonName"
-        android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTituloAdicionar" />
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true">
 
-    <EditText
-        android:id="@+id/txtIdentificacion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:hint="@string/txtIdentificacion_Text"
-        android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/txtCodigo"
-        tools:layout_editor_absoluteX="0dp"
-        android:autofillHints="" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
 
-    <EditText
-        android:id="@+id/txtNombres"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:hint="@string/txtNombres_Text"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtIdentificacion"
-        android:autofillHints="" />
 
-    <EditText
-        android:id="@+id/txtApellidos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:hint="@string/txtApellido_Text"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtNombres"
-        android:autofillHints="" />
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_height="124dp"
+                android:layout_gravity="center"
+                app:srcCompat="@mipmap/img_agregar"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/txtTituloAdicionar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:lineSpacingExtra="8sp"
+                android:layout_gravity="center"
+                android:text="@string/txt_RegistrarEstudiante"
+                android:textAlignment="center"
+                android:textColor="@color/green"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+
+            <TextView
+                android:id="@+id/textNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Nombre:"
+                android:textAlignment="viewStart"
+                android:textSize="18sp"
+                android:layout_marginStart="10dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:hint="Ingrese el nombre"
+                android:inputType="textPersonName"
+                android:text="" />
+
+
+            <TextView
+                android:id="@+id/textFechaDescubrimiento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="10dp"
+                android:text="Fecha de descubrimiento:"
+                android:textAlignment="viewStart"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="horizontal"
+                >
+
+
+                <EditText
+                    android:id="@+id/txtFecha"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="26/03/2021"
+                    android:enabled="false"/>
+
+                <ImageButton
+                    android:id="@+id/btnFecha"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:scaleType="fitCenter"
+                    android:layout_marginEnd="10dp"
+                    app:srcCompat="@mipmap/calendario" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textAltura"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Altura del animal:"
+                android:textAlignment="viewStart"
+                android:layout_marginStart="10dp"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtAltura"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:hint="Ingrese la altura del animal"
+                android:inputType="textMultiLine"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/textDescripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="10dp"
+                android:text="Descripción:"
+                android:textAlignment="viewStart"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtDescripcion"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:ems="10"
+                android:hint="Ingrese una breve descripción"
+                android:inputType="textMultiLine"
+                android:text=""
+                android:textAlignment="textStart" />
+
+
+            <Button
+                android:id="@+id/btnRegistrarEstudiante"
+                android:layout_width="119dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="12dp"
+                android:layout_gravity="center"
+                android:onClick="btnRegitrar_Click"
+                android:text="@string/btnRegistar_Text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+            <Button
+                android:id="@+id/btnVolver"
+                android:layout_width="119dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="12dp"
+                android:onClick="btnVolver_Click"
+                android:text="@string/btn_volverText"
+                android:layout_gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.493"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnRegistrarEstudiante" />
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+</RelativeLayout>
