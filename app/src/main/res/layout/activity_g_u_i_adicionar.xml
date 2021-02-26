@@ -97,7 +97,7 @@
                     android:text="26/03/2021" />
 
                 <ImageButton
-                    android:id="@+id/btnFecha"
+                    android:id="@+id/btnBuscarEliminar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10dp"

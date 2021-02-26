@@ -46,7 +46,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="visible"
+                tools:visibility="visible">
 
                 <TextView
                     android:id="@+id/textBusqueda"
@@ -68,7 +69,7 @@
 
                     <EditText
                         android:id="@+id/txtFecha"
-                        android:layout_width="350dp"
+                        android:layout_width="290dp"
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:hint="Ingrese el nombre de la mascota"
@@ -76,11 +77,12 @@
                         android:text="" />
 
                     <ImageButton
-                        android:id="@+id/btnFecha"
+                        android:id="@+id/btnBuscarEliminar"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="10dp"
                         android:layout_weight="1"
+                        android:onClick="btnBuscar_Click"
                         android:scaleType="fitCenter"
                         app:srcCompat="@mipmap/img_buscar" />
                 </LinearLayout>
@@ -92,6 +94,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="30dp"
                 android:orientation="vertical"
+                android:visibility="gone"
                 tools:visibility="visible">
 
                 <EditText
@@ -116,6 +119,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
+                        android:backgroundTint="@color/purple_700"
+                        android:onClick="btnCancelar_Click"
                         android:text="CANCELAR" />
 
                     <Button
@@ -123,6 +128,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
+                        android:backgroundTint="@color/red"
                         android:text="ELIMINAR" />
 
                 </LinearLayout>
@@ -132,16 +138,16 @@
 
             <Button
                 android:id="@+id/btnVolver"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="25dp"
                 android:onClick="btnVolver_Click"
                 android:text="@string/btn_volverText"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
