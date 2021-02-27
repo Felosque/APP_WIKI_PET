@@ -6,6 +6,8 @@ import java.util.Date;
 
 public class ServicioFuncionalidades {
 
+    public static String tiposAnimal[] = {"MAMIFERO", "AVE",  "ANFIBIO", "REPTIL", "PECES", "ARACNIDOS", "MOLUSCOS"};
+
     public static Date ParseFecha(String fecha)
     {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");

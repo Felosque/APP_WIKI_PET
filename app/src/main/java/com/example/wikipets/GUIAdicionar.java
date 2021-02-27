@@ -31,7 +31,6 @@ public class GUIAdicionar extends AppCompatActivity {
     private Calendar c;
     private DatePickerDialog dpd;
 
-    private String tiposAnimal[] = {"AVE", "MAMIFERO", "ANFIBIO", "REPTIL", "PECES", "ARACNIDOS", "MOLUSCOS"};
     private Spinner spnTipo;
 
     @Override
@@ -45,7 +44,7 @@ public class GUIAdicionar extends AppCompatActivity {
         altura = (TextView) findViewById(R.id.txtAltura);
 
         spnTipo = (Spinner) findViewById(R.id.spTipo);
-        ArrayAdapter adaptador = new ArrayAdapter(this, android.R.layout.simple_spinner_item, tiposAnimal);
+        ArrayAdapter adaptador = new ArrayAdapter(this, android.R.layout.simple_spinner_item, ServicioFuncionalidades.tiposAnimal);
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnTipo.setAdapter(adaptador);
     }
