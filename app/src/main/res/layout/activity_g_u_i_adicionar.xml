@@ -13,18 +13,19 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             >
 
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/imgAdicionar"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_height="124dp"
                 android:layout_gravity="center"
-                app:srcCompat="@mipmap/img_agregar"/>
+                app:srcCompat="@mipmap/img_agregar"
+                android:contentDescription="TODO" />
 
             <TextView
                 android:id="@+id/txtTituloAdicionar"
@@ -47,11 +48,11 @@
                 android:id="@+id/textNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="30dp"
-                android:text="Nombre:"
+                android:text="@string/text_Nombre"
                 android:textAlignment="viewStart"
                 android:textSize="18sp"
-                android:layout_marginStart="10dp"
                 android:textStyle="bold" />
 
             <EditText
@@ -61,18 +62,19 @@
                 android:ems="10"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:hint="Ingrese el nombre"
+                android:hint="@string/desc_Nombre"
                 android:inputType="textPersonName"
-                android:text="" />
+                android:text=""
+                android:autofillHints="" />
 
 
             <TextView
                 android:id="@+id/textFechaDescubrimiento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
                 android:layout_marginStart="10dp"
-                android:text="Fecha de descubrimiento:"
+                android:layout_marginTop="25dp"
+                android:text="@string/text_FechaDescubrimiento"
                 android:textAlignment="viewStart"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -94,17 +96,19 @@
                     android:enabled="false"
                     android:inputType="textPersonName"
                     android:onClick="btnFecha_Clic"
-                    android:text="26/03/2021" />
+                    android:text="@string/desc_Fecha"
+                    android:autofillHints="" />
 
                 <ImageButton
                     android:id="@+id/btnFechaAdd"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
                     android:onClick="btnFecha_Clic"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@mipmap/calendario" />
+                    app:srcCompat="@mipmap/calendario"
+                    android:contentDescription="TODO" />
 
 
             </LinearLayout>
@@ -113,10 +117,10 @@
                 android:id="@+id/textAltura"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:text="Altura del animal:"
-                android:textAlignment="viewStart"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="25dp"
+                android:text="@string/text_Altura"
+                android:textAlignment="viewStart"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -127,18 +131,19 @@
                 android:ems="10"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:hint="Ingrese la altura del animal"
+                android:hint="@string/desc_Altura"
                 android:inputType="numberDecimal"
-                android:text="" />
+                android:text=""
+                android:autofillHints="" />
 
             <TextView
                 android:id="@+id/textTipo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:text="Tipo de animal:"
-                android:textAlignment="viewStart"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="25dp"
+                android:text="@string/text_TipoAnimal"
+                android:textAlignment="viewStart"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -156,7 +161,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:layout_marginStart="10dp"
-                android:text="Descripción:"
+                android:text="@string/text_Descripcion"
                 android:textAlignment="viewStart"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -168,10 +173,11 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:ems="10"
-                android:hint="Ingrese una breve descripción"
+                android:hint="@string/desc_Descripcion"
                 android:inputType="textMultiLine"
                 android:text=""
-                android:textAlignment="textStart" />
+                android:textAlignment="textStart"
+                android:autofillHints="" />
 
 
             <Button

@@ -2,8 +2,10 @@ package com.example.wikipets;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,9 @@ public class GUIBuscar extends AppCompatActivity {
             Pet busqueda = ServicioPet.searchPetsByName(textBusqueda);
 
             if (busqueda != null){
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(txtCodigo.getWindowToken(), 0);
+
                 String texto = "MASCOTA N°-: " + busqueda.getId() + "\n" +
                         "Nombre: " + busqueda.getName() + "\n"+
                         "Fecha: " + ServicioFuncionalidades.dateToString(busqueda.getDiscoveredDate()) + "\n"+

@@ -2,13 +2,16 @@ package com.example.wikipets;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wikipets.estructural.Pet;
+import com.example.wikipets.servicios.ServicioFuncionalidades;
 import com.example.wikipets.servicios.ServicioPet;
 
 public class GUIEliminar extends AppCompatActivity {
@@ -45,9 +48,12 @@ public class GUIEliminar extends AppCompatActivity {
         Pet busqueda = ServicioPet.searchPetsByName(textBusqueda);
 
         if (busqueda != null){
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(txtBusqueda.getWindowToken(), 0);
+
             String texto = "MASCOTA N°-: " + busqueda.getId() + "\n" +
                     "Nombre: " + busqueda.getName() + "\n"+
-                    "Fecha: " + busqueda.getDiscoveredDate().toString() + "\n"+
+                    "Fecha: " + ServicioFuncionalidades.dateToString(busqueda.getDiscoveredDate()) + "\n"+
                     "Altura: " + busqueda.getHeight() + "\n"+
                     "Tipo: " + busqueda.getAnimalType() + "\n"+
                     "Descripción: " + busqueda.getDescription() + "\n\n";

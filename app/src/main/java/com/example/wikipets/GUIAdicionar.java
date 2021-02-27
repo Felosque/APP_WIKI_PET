@@ -38,6 +38,7 @@ public class GUIAdicionar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_g_u_i_adicionar);
 
+        c = Calendar.getInstance();
         nombre = (TextView) findViewById(R.id.txtNombre);
         descripcion = (TextView) findViewById(R.id.txtDescripcion);
         fechaDescubrimiento = (TextView) findViewById(R.id.txtFecha);
@@ -84,10 +85,10 @@ public class GUIAdicionar extends AppCompatActivity {
     }
 
     private void mostrarCalendario(View view){
-        c = Calendar.getInstance();
+
         int day = c.get(Calendar.DAY_OF_MONTH);
         int month = c.get(Calendar.MONTH);
-        int year = 2021;
+        int year = c.get(Calendar.YEAR);
 
         dpd = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override

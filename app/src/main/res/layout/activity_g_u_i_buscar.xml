@@ -29,7 +29,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/img_buscar" />
+        app:srcCompat="@mipmap/img_buscar"
+        android:contentDescription="TODO" />
 
     <Button
         android:id="@+id/button4"
@@ -65,7 +66,7 @@
         android:layout_marginTop="40dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="Ingrese el nombre"
+        android:hint="@string/desc_IngreseNombre"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtBuscarV" />
@@ -78,7 +79,6 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:autofillHints=""
-        android:editable="false"
         android:ems="10"
         android:enabled="false"
         android:gravity="start|top"

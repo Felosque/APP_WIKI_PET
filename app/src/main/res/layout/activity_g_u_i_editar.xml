@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <ImageView
@@ -22,7 +22,8 @@
                 android:layout_height="124dp"
                 android:layout_marginTop="28dp"
                 android:layout_gravity="center"
-                app:srcCompat="@mipmap/img_editar" />
+                app:srcCompat="@mipmap/img_editar"
+                android:contentDescription="TODO" />
 
             <TextView
                 android:id="@+id/txtEditar"
@@ -51,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="25dp"
-                    android:text="Buscar mascota:"
+                    android:text="@string/text_BuscarMascota"
                     android:textAlignment="viewStart"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -68,19 +69,21 @@
                         android:layout_width="290dp"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:hint="Ingrese el nombre"
+                        android:hint="@string/desc_IngreseNombre"
                         android:inputType="textPersonName"
-                        android:text="" />
+                        android:text=""
+                        android:autofillHints="" />
 
                     <ImageButton
                         android:id="@+id/btnBuscarUpdate"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="10dp"
                         android:layout_weight="1"
                         android:onClick="btnBuscar_Click"
                         android:scaleType="fitCenter"
-                        app:srcCompat="@mipmap/img_buscar" />
+                        app:srcCompat="@mipmap/img_buscar"
+                        android:contentDescription="TODO" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -99,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="30dp"
-                    android:text="Nombre:"
+                    android:text="@string/desc_Nombre"
                     android:textAlignment="viewStart"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -111,9 +114,10 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:ems="10"
-                    android:hint="Ingrese el nombre"
+                    android:hint="@string/desc_IngreseNombre"
                     android:inputType="textPersonName"
-                    android:text="" />
+                    android:text=""
+                    android:autofillHints="" />
 
 
                 <TextView
@@ -122,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="25dp"
-                    android:text="Fecha de descubrimiento:"
+                    android:text="@string/text_FechaDescubrimiento"
                     android:textAlignment="viewStart"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -142,16 +146,20 @@
                         android:enabled="false"
                         android:inputType="textPersonName"
                         android:onClick="btnFecha_Clic"
-                        android:text="26/03/2021" />
+                        android:text="@string/desc_Fecha"
+                        android:hint="Fecha"
+                        android:autofillHints="" />
 
                     <ImageButton
                         android:id="@+id/btnFechaAdd"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="10dp"
                         android:layout_weight="1"
+                        android:onClick="btnFecha_Clic"
                         android:scaleType="fitCenter"
-                        app:srcCompat="@mipmap/calendario" />
+                        app:srcCompat="@mipmap/calendario"
+                        android:contentDescription="TODO" />
 
 
                 </LinearLayout>
@@ -162,7 +170,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="25dp"
-                    android:text="Altura del animal:"
+                    android:text="@string/desc_Altura"
                     android:textAlignment="viewStart"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -174,9 +182,10 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:ems="10"
-                    android:hint="Ingrese la altura del animal"
+                    android:hint="@string/desc_Altura"
                     android:inputType="numberDecimal"
-                    android:text="" />
+                    android:text=""
+                    android:autofillHints="" />
 
                 <TextView
                     android:id="@+id/textTipo"
@@ -227,13 +236,14 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/btnCancelar"
                         android:layout_width="165dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:backgroundTint="@color/red"
                         android:onClick="btnCancelar_Click"
-                        android:text="CANCELAR" />
+                        android:text="@string/text_Cancelar" />
 
                     <Button
                         android:id="@+id/btnActualizar"
@@ -243,7 +253,7 @@
                         android:layout_marginEnd="20dp"
                         android:backgroundTint="@color/purple_700"
                         android:onClick="btnActualizar_Click"
-                        android:text="ACTUALIZAR" />
+                        android:text="@string/text_Actualizar" />
 
                 </LinearLayout>
 
@@ -251,7 +261,7 @@
 
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/btnVolverEditar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"

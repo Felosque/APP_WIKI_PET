@@ -3,10 +3,10 @@
     <string name="txtMenu">Menú Principal</string>
     <string name="btn_Ingresar_Text">Ingresar</string>
     <string name="txtRegistrarse_Text">Registrarse</string>
-    <string name="txt_RegistrarEstudiante">REGISTRAR MASCOTA</string>
+    <string name="txt_RegistrarEstudiante">REGISTRAR ANIMAL</string>
     <string name="btn_volverText">VOLVER</string>
-    <string name="txt_editar_Text">EDITAR MASCOTA</string>
-    <string name="txt_listar_text">LISTAR MASCOTAS</string>
+    <string name="txt_editar_Text">EDITAR ANIMAL</string>
+    <string name="txt_listar_text">LISTAR ANIMAL</string>
     <string name="txtRegistrar">REGISTRAR</string>
     <string name="txtEliminar">ELIMINAR</string>
     <string name="txtSalir">SALIR</string>
@@ -18,7 +18,21 @@
     <string name="txtNombres_Text">Nombres</string>
     <string name="txtApellido_Text">Apellidos</string>
     <string name="txtCodigo_Text">Código</string>
-    <string name="buscar_estudiante">BUSCAR MASCOTA</string>
+    <string name="buscar_estudiante">BUSCAR ANIMAL</string>
     <string name="buscar">Buscar</string>
     <string name="c_digo">Código</string>
+    <string name="text_Nombre">Nombre:</string>
+    <string name="text_FechaDescubrimiento">Fecha de descubrimiento:</string>
+    <string name="text_Altura">Altura del animal:</string>
+    <string name="text_TipoAnimal">Tipo de animal:</string>
+    <string name="text_Descripcion">Descripción:</string>
+    <string name="desc_Nombre">Ingrese el nombre</string>
+    <string name="desc_Fecha">01/03/2021</string>
+    <string name="desc_Altura">Ingrese la altura del animal</string>
+    <string name="desc_Descripcion">Ingrese una breve descripción</string>
+    <string name="text_BuscarMascota">Buscar mascota:</string>
+    <string name="desc_IngreseNombre">Ingrese el nombre</string>
+    <string name="text_Cancelar">Cancelar</string>
+    <string name="text_Actualizar">Actualizar</string>
+    <string name="title_EliminarMascota">ELIMINAR ANIMAL</string>
 </resources>
