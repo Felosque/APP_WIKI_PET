@@ -63,6 +63,7 @@
         android:layout_height="117dp"
         android:layout_marginTop="28dp"
         android:backgroundTint="#003F51B5"
+        android:contentDescription="@string/app_name"
         android:onClick="btnVolver_Click"
         android:scaleType="centerInside"
         android:src="@mipmap/img_salir"
@@ -70,8 +71,7 @@
         app:layout_constraintHorizontal_bias="0.59"
         app:layout_constraintStart_toEndOf="@+id/btnList"
         app:layout_constraintTop_toBottomOf="@+id/txtEdit"
-        tools:srcCompat="@tools:sample/avatars"
-        android:contentDescription="TODO" />
+        tools:srcCompat="@tools:sample/avatars" />
 
     <ImageButton
         android:id="@+id/btnChos"
@@ -80,13 +80,13 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="28dp"
         android:backgroundTint="#003F51B5"
+        android:contentDescription="@string/app_name"
         android:onClick="btnBuscar_Click"
         android:scaleType="centerInside"
         android:src="@mipmap/img_buscar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtRegistrar"
-        tools:srcCompat="@tools:sample/avatars"
-        android:contentDescription="TODO" />
+        tools:srcCompat="@tools:sample/avatars" />
 
     <ImageButton
         android:id="@+id/btnEdit"
@@ -94,6 +94,7 @@
         android:layout_height="115dp"
         android:layout_marginTop="28dp"
         android:backgroundTint="#003F51B5"
+        android:contentDescription="@string/app_name"
         android:onClick="btnEditar_Click"
         android:scaleType="centerInside"
         android:src="@mipmap/img_editar"
@@ -101,8 +102,7 @@
         app:layout_constraintHorizontal_bias="0.59"
         app:layout_constraintStart_toEndOf="@+id/btnChos"
         app:layout_constraintTop_toBottomOf="@+id/txtElimnar"
-        tools:srcCompat="@tools:sample/avatars"
-        android:contentDescription="TODO" />
+        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/txtMenu"
@@ -125,13 +125,13 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="28dp"
         android:backgroundTint="#003F51B5"
+        android:contentDescription="@string/app_name"
         android:onClick="btnListar_Click"
         android:scaleType="centerInside"
         android:src="@mipmap/img_listar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtBuscar"
-        tools:srcCompat="@tools:sample/avatars"
-        android:contentDescription="TODO" />
+        tools:srcCompat="@tools:sample/avatars" />
 
     <ImageButton
         android:id="@+id/btnDel"
@@ -140,6 +140,7 @@
         android:layout_marginStart="88dp"
         android:layout_marginTop="24dp"
         android:backgroundTint="#003F51B5"
+        android:contentDescription="@string/app_name"
         android:onClick="btnDel_Click"
         android:scaleType="centerInside"
         android:src="@mipmap/img_eliminar"
@@ -147,8 +148,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/btnAdd"
         app:layout_constraintTop_toBottomOf="@+id/txtMenu"
-        tools:srcCompat="@tools:sample/avatars"
-        android:contentDescription="TODO" />
+        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/txtRegistrar"
@@ -183,12 +183,12 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="24dp"
         android:backgroundTint="#003F51B5"
+        android:contentDescription="@string/app_name"
         android:onClick="btnAdd_Click"
         android:scaleType="centerInside"
         android:src="@mipmap/img_agregar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtMenu"
-        tools:srcCompat="@tools:sample/avatars"
-        android:contentDescription="TODO" />
+        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
