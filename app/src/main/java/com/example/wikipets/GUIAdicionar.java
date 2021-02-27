@@ -80,7 +80,7 @@ public class GUIAdicionar extends AppCompatActivity {
             spnTipo.setSelection(0);
 
         }catch (Exception e){
-            Toast.makeText(this, "Error al registrar la mascota " + e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Error al registrar la mascota: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 

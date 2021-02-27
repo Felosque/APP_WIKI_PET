@@ -27,7 +27,7 @@ public class GUIListar extends AppCompatActivity {
     public void btnListar_Click (View view){
         try {
             ArrayList<Pet> busqueda = ServicioPet.getPets();
-            if (busqueda != null){
+            if (!busqueda.isEmpty()){
                 String txtBusqueda = "";
                 for (int i = 0; i < busqueda.size(); i++){
                     txtBusqueda += "MASCOTA N°-: " + busqueda.get(i).getId() + "\n" +

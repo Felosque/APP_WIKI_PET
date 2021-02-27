@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.wikipets.estructural.Pet;
+import com.example.wikipets.servicios.ServicioPet;
+
 public class GUIBuscar extends AppCompatActivity {
 
     private TextView txtCodigo;
@@ -24,18 +27,21 @@ public class GUIBuscar extends AppCompatActivity {
     public void btnBuscar_Click (View view) {
 
         try {
-            /*Estudiante busqueda = ServicioEstudiantes.buscarEstudiante(txtCodigo.getText().toString());
+            String textBusqueda = txtCodigo.getText().toString();
+            Pet busqueda = ServicioPet.searchPets(textBusqueda);
+
             if (busqueda != null){
-                String txtBusqueda = "Estudiante: \n" +
-                                    "Código: " + busqueda.getCodigo() + "\n"+
-                                    "N° Identificación: " + busqueda.getDocumentoIdentificacion() + "\n"+
-                                    "Nombres: " + busqueda.getNombre() + "\n"+
-                                    "Apellidos: " + busqueda.getApellido() + "\n";
-                txtMultiLine.setText(txtBusqueda);
+                String texto = "MASCOTA N°-: " + busqueda.getId() + "\n" +
+                        "Nombre: " + busqueda.getName() + "\n"+
+                        "Fecha: " + busqueda.getDiscoveredDate().toString() + "\n"+
+                        "Altura: " + busqueda.getHeight() + "\n"+
+                        "Tipo: " + busqueda.getAnimalType() + "\n"+
+                        "Descripción: " + busqueda.getDescription() + "\n\n";
+
+                txtMultiLine.setText(texto);
             }else {
-                txtMultiLine.setText("");
-                Toast.makeText(this, "No se encontró ningún estudiante.", Toast.LENGTH_LONG ).show();
-            }*/
+                Toast.makeText(this, "No se encontró ningún mascota.", Toast.LENGTH_LONG ).show();
+            }
         }catch (Exception e){
             Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG ).show();
         }

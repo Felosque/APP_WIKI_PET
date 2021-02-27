@@ -14,10 +14,16 @@ public class ServicioPet {
 
     }
 
-    public static void addPets(Pet pet){
-        numRegistros++;
-        pet.setId(numRegistros);
-        pets.add(pet);
+    public static void addPets(Pet pet) throws Exception {
+
+        Pet buscado = searchPets(pet.getName());
+        if (buscado != null) {
+            throw new Exception("Ya existe un animal con ese nombre");
+        }else {
+            numRegistros++;
+            pet.setId(numRegistros);
+            pets.add(pet);
+        }
     }
 
     public static boolean deletePet(String name){
@@ -26,9 +32,8 @@ public class ServicioPet {
 
     public static Pet searchPets(String name) {
         Pet pet = null;
-
         for (Pet petx : pets) {
-            if (petx.getName().equals(name)) {
+            if (petx.getName().toUpperCase().equals(name.toUpperCase())) {
                 pet = petx;
                 return pet;
             }

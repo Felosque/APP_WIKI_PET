@@ -5,6 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.wikipets.estructural.Pet;
+import com.example.wikipets.servicios.ServicioPet;
 
 public class GUIEliminar extends AppCompatActivity {
 
@@ -12,6 +17,10 @@ public class GUIEliminar extends AppCompatActivity {
     private LinearLayout layoutBusqueda;
 
     private LinearLayout layoutResultado;
+
+    private TextView txtBusqueda;
+
+    private TextView txtResultado;
 
 
     @Override
@@ -21,18 +30,42 @@ public class GUIEliminar extends AppCompatActivity {
 
         layoutBusqueda = findViewById(R.id.layoutBusqueda);
         layoutResultado = findViewById(R.id.layoutResultado);
-
+        txtBusqueda = findViewById(R.id.txtBusquedaE);
+        txtResultado = findViewById(R.id.txtMultiLine);
 
     }
 
     public void btnCancelar_Click(View view){
+        txtBusqueda.setText("");
         visibleResultados(view,false);
     }
 
     public void btnBuscar_Click(View view){
-        visibleResultados(view,true);
+        String textBusqueda = txtBusqueda.getText().toString();
+        Pet busqueda = ServicioPet.searchPets(textBusqueda);
+
+        if (busqueda != null){
+            String texto = "MASCOTA N°-: " + busqueda.getId() + "\n" +
+                    "Nombre: " + busqueda.getName() + "\n"+
+                    "Fecha: " + busqueda.getDiscoveredDate().toString() + "\n"+
+                    "Altura: " + busqueda.getHeight() + "\n"+
+                    "Tipo: " + busqueda.getAnimalType() + "\n"+
+                    "Descripción: " + busqueda.getDescription() + "\n\n";
+
+            txtResultado.setText(texto);
+            visibleResultados(view,true);
+        }else {
+            Toast.makeText(this, "No se encontró ninguna mascota.", Toast.LENGTH_LONG ).show();
+        }
     }
 
+    public void btnEliminar_Click(View view){
+        String textBusqueda = txtBusqueda.getText().toString();
+        ServicioPet.deletePet(textBusqueda);
+        Toast.makeText(this, "Se eliminó correctamente la mascota: " + textBusqueda, Toast.LENGTH_LONG ).show();
+        txtBusqueda.setText("");
+        visibleResultados(view,false);
+    }
 
     public void btnVolver_Click (View view) {
         finish();
