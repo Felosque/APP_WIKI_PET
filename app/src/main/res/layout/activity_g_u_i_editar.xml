@@ -242,6 +242,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:backgroundTint="@color/purple_700"
+                        android:onClick="btnActualizar_Click"
                         android:text="ACTUALIZAR" />
 
                 </LinearLayout>

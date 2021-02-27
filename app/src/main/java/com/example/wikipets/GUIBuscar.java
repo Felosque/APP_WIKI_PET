@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wikipets.estructural.Pet;
+import com.example.wikipets.servicios.ServicioFuncionalidades;
 import com.example.wikipets.servicios.ServicioPet;
 
 public class GUIBuscar extends AppCompatActivity {
@@ -28,12 +29,12 @@ public class GUIBuscar extends AppCompatActivity {
 
         try {
             String textBusqueda = txtCodigo.getText().toString();
-            Pet busqueda = ServicioPet.searchPets(textBusqueda);
+            Pet busqueda = ServicioPet.searchPetsByName(textBusqueda);
 
             if (busqueda != null){
                 String texto = "MASCOTA N°-: " + busqueda.getId() + "\n" +
                         "Nombre: " + busqueda.getName() + "\n"+
-                        "Fecha: " + busqueda.getDiscoveredDate().toString() + "\n"+
+                        "Fecha: " + ServicioFuncionalidades.dateToString(busqueda.getDiscoveredDate()) + "\n"+
                         "Altura: " + busqueda.getHeight() + "\n"+
                         "Tipo: " + busqueda.getAnimalType() + "\n"+
                         "Descripción: " + busqueda.getDescription() + "\n\n";

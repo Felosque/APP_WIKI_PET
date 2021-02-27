@@ -42,7 +42,7 @@ public class GUIEliminar extends AppCompatActivity {
 
     public void btnBuscar_Click(View view){
         String textBusqueda = txtBusqueda.getText().toString();
-        Pet busqueda = ServicioPet.searchPets(textBusqueda);
+        Pet busqueda = ServicioPet.searchPetsByName(textBusqueda);
 
         if (busqueda != null){
             String texto = "MASCOTA N°-: " + busqueda.getId() + "\n" +

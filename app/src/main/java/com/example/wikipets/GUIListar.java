@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wikipets.estructural.Pet;
+import com.example.wikipets.servicios.ServicioFuncionalidades;
 import com.example.wikipets.servicios.ServicioPet;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class GUIListar extends AppCompatActivity {
                 for (int i = 0; i < busqueda.size(); i++){
                     txtBusqueda += "MASCOTA N°-: " + busqueda.get(i).getId() + "\n" +
                             "Nombre: " + busqueda.get(i).getName() + "\n"+
-                            "Fecha: " + busqueda.get(i).getDiscoveredDate().toString() + "\n"+
+                            "Fecha: " + ServicioFuncionalidades.dateToString(busqueda.get(i).getDiscoveredDate()) + "\n"+
                             "Altura: " + busqueda.get(i).getHeight() + "\n"+
                             "Tipo: " + busqueda.get(i).getAnimalType() + "\n"+
                             "Descripción: " + busqueda.get(i).getDescription() + "\n\n";

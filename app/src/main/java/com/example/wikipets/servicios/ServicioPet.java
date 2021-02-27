@@ -16,7 +16,7 @@ public class ServicioPet {
 
     public static void addPets(Pet pet) throws Exception {
 
-        Pet buscado = searchPets(pet.getName());
+        Pet buscado = searchPetsByName(pet.getName());
         if (buscado != null) {
             throw new Exception("Ya existe un animal con ese nombre");
         }else {
@@ -27,13 +27,25 @@ public class ServicioPet {
     }
 
     public static boolean deletePet(String name){
-        return pets.remove(searchPets(name));
+        return pets.remove(searchPetsByName(name));
     }
 
-    public static Pet searchPets(String name) {
+    public static Pet searchPetsByName(String name) {
         Pet pet = null;
         for (Pet petx : pets) {
             if (petx.getName().toUpperCase().equals(name.toUpperCase())) {
+                pet = petx;
+                return pet;
+            }
+        }
+        return pet;
+
+    }
+
+    public static Pet searchPetsByID(int pId) {
+        Pet pet = null;
+        for (Pet petx : pets) {
+            if (petx.getId() == pId) {
                 pet = petx;
                 return pet;
             }
@@ -46,18 +58,24 @@ public class ServicioPet {
         return pets;
     }
 
-    public static boolean updatePet(Pet petsUpdate){
+    public static boolean updatePet(Pet petsUpdate) throws Exception {
+
+        for (Pet petx : pets) {
+            if (petx.getName().toUpperCase().equals(petsUpdate.getName().toUpperCase()) && petx.getId() != petsUpdate.getId()) {
+                throw new Exception("Se ha encontrado otro animal con el mismo nombre. ID: " + petx.getId());
+            }
+        }
+
         Pet pet = null;
         try{
-            pet = searchPets(petsUpdate.getName());
+            pet = searchPetsByID(petsUpdate.getId());
             pet.setAnimalType(petsUpdate.getAnimalType());
             pet.setDescription(petsUpdate.getDescription());
             pet.setDiscoveredDate(petsUpdate.getDiscoveredDate());
             pet.setHeight(petsUpdate.getHeight());
             return true;
         }catch (Exception e){
-            e.getMessage();
-            return false;
+            throw new Exception("Error al actualizar al animal. No se ha encontrado.");
         }
     }
 }

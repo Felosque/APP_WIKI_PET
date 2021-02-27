@@ -3,17 +3,23 @@ package com.example.wikipets;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.wikipets.estructural.Pet;
 import com.example.wikipets.servicios.ServicioFuncionalidades;
+import com.example.wikipets.servicios.ServicioPet;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class GUIEditar extends AppCompatActivity {
 
@@ -21,6 +27,8 @@ public class GUIEditar extends AppCompatActivity {
     private TextView txtBusqueda;
 
     //Panel Edición
+    private int idMascota;
+
     private TextView nombre;
 
     private TextView descripcion;
@@ -49,6 +57,7 @@ public class GUIEditar extends AppCompatActivity {
         fechaDescubrimiento = (TextView) findViewById(R.id.txtFecha);
         altura = (TextView) findViewById(R.id.txtAltura);
         txtBusqueda = findViewById(R.id.txtBusquedaE);
+        idMascota = -1;
 
         layoutBusqueda = findViewById(R.id.layoutBusqueda);
         layoutResultado = findViewById(R.id.layoutEdicion);
@@ -72,8 +81,50 @@ public class GUIEditar extends AppCompatActivity {
         visibleResultados(view,false);
     }
 
+    public void btnActualizar_Click(View view){
+        if(nombre.getText().toString().isEmpty()) {Toast.makeText(this, "El nombre no puede estar vacío.", Toast.LENGTH_LONG).show(); return;}
+        if(fechaDescubrimiento.getText().toString().isEmpty()) {Toast.makeText(this, "El nombre no puede estar vacío.", Toast.LENGTH_LONG).show(); return;}
+        if(altura.getText().toString().isEmpty()) {Toast.makeText(this, "Debe tener una altura", Toast.LENGTH_LONG).show(); return;}
+        if(descripcion.getText().toString().isEmpty()) {
+            descripcion.setText("Ninguna");
+        }
+
+        try {
+            String textoNombre = nombre.getText().toString();
+            Date textoFecha = ServicioFuncionalidades.ParseFecha(fechaDescubrimiento.getText().toString());
+            String textoDes = descripcion.getText().toString();
+            Double textoAltura = Double.parseDouble(altura.getText().toString());
+            String textoTipo = spnTipo.getSelectedItem().toString();
+
+            Pet nuevoPet = new Pet(idMascota, textoNombre, textoFecha, textoDes, textoAltura, textoTipo);
+            ServicioPet.updatePet(nuevoPet);
+            Toast.makeText(this, "Se actualizó correctamente la mascota ID: " + idMascota, Toast.LENGTH_LONG).show();
+            visibleResultados(view,false);
+        }catch (Exception e)
+        {
+            Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG ).show();
+        }
+
+    }
+
     public void btnBuscar_Click(View view){
-        visibleResultados(view,true);
+        String textBusqueda = txtBusqueda.getText().toString();
+        Pet busqueda = ServicioPet.searchPetsByName(textBusqueda);
+
+        if (busqueda != null){
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(txtBusqueda.getWindowToken(), 0);
+
+            this.idMascota = busqueda.getId();
+            this.nombre.setText(busqueda.getName());
+            this.altura.setText(""+busqueda.getHeight());
+            this.descripcion.setText(busqueda.getDescription());
+            this.fechaDescubrimiento.setText(ServicioFuncionalidades.dateToString(busqueda.getDiscoveredDate()));
+            this.spnTipo.setSelection(ServicioFuncionalidades.getIndexSpinnerValue(spnTipo, busqueda.getAnimalType()));
+            visibleResultados(view,true);
+        }else {
+            Toast.makeText(this, "No se encontró ninguna mascota.", Toast.LENGTH_LONG ).show();
+        }
     }
 
     private void visibleResultados(View view, boolean pMostrar){
