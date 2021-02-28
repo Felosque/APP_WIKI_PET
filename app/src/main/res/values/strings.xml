@@ -23,12 +23,12 @@
     <string name="c_digo">Código</string>
     <string name="text_Nombre">Nombre:</string>
     <string name="text_FechaDescubrimiento">Fecha de descubrimiento:</string>
-    <string name="text_Altura">Altura del animal:</string>
+    <string name="text_Altura">Altura del animal (m):</string>
     <string name="text_TipoAnimal">Tipo de animal:</string>
     <string name="text_Descripcion">Descripción:</string>
     <string name="desc_Nombre">Ingrese el nombre</string>
     <string name="desc_Fecha">01/03/2021</string>
-    <string name="desc_Altura">Ingrese la altura del animal</string>
+    <string name="desc_Altura">Ingrese la altura del animal (m)</string>
     <string name="desc_Descripcion">Ingrese una breve descripción</string>
     <string name="text_BuscarMascota">Buscar mascota:</string>
     <string name="desc_IngreseNombre">Ingrese el nombre</string>

@@ -57,15 +57,16 @@ public class GUIAdicionar extends AppCompatActivity {
 
     public void btnRegitrar_Click (View view) {
         try{
+            Date textoFecha = ServicioFuncionalidades.ParseFecha(fechaDescubrimiento.getText().toString());
+            if(textoFecha.after(new Date())) {Toast.makeText(this, "No se puede poner una fecha superior a hoy.", Toast.LENGTH_LONG).show(); return;}
             if(nombre.getText().toString().isEmpty()) {Toast.makeText(this, "El nombre no puede estar vacío.", Toast.LENGTH_LONG).show(); return;}
             if(fechaDescubrimiento.getText().toString().isEmpty()) {Toast.makeText(this, "El nombre no puede estar vacío.", Toast.LENGTH_LONG).show(); return;}
             if(altura.getText().toString().isEmpty()) {Toast.makeText(this, "Debe tener una altura", Toast.LENGTH_LONG).show(); return;}
             if(descripcion.getText().toString().isEmpty()) {
-                descripcion.setText("Ningúna");
+                descripcion.setText("Ninguna");
             }
 
             String textoNombre = nombre.getText().toString();
-            Date textoFecha = ServicioFuncionalidades.ParseFecha(fechaDescubrimiento.getText().toString());
             String textoDes = descripcion.getText().toString();
             Double textoAltura = Double.parseDouble(altura.getText().toString());
             String textoTipo = spnTipo.getSelectedItem().toString();
@@ -96,6 +97,7 @@ public class GUIAdicionar extends AppCompatActivity {
                 fechaDescubrimiento.setText(mDay + "/" + (mMonth+1) + "/" + mYear);
             }
         }, day, month, year);
+        dpd.updateDate(year, month, day);
         dpd.show();
     }
 
