@@ -18,6 +18,8 @@ public class GUIBuscar extends AppCompatActivity {
     private TextView txtCodigo;
     private TextView txtMultiLine;
 
+    private TextView textoBusqueda;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +27,8 @@ public class GUIBuscar extends AppCompatActivity {
 
         txtCodigo = (TextView) findViewById(R.id.txtBusqueda);
         txtMultiLine = (TextView) findViewById(R.id.txtMultiLine);
+        textoBusqueda = (TextView) findViewById(R.id.textBusqueda);
+        textoBusqueda.setVisibility(View.GONE);
     }
 
     public void btnBuscar_Click (View view) {

@@ -33,7 +33,7 @@ public class GUIEliminar extends AppCompatActivity {
 
         layoutBusqueda = findViewById(R.id.layoutBusqueda);
         layoutResultado = findViewById(R.id.layoutResultado);
-        txtBusqueda = findViewById(R.id.txtBusquedaE);
+        txtBusqueda = findViewById(R.id.txtBusqueda);
         txtResultado = findViewById(R.id.txtMultiLine);
 
     }

@@ -44,141 +44,12 @@
                 />
 
 
-            <TextView
-                android:id="@+id/textNombre"
+            <include
+                layout="@layout/formulario_animal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="30dp"
-                android:text="@string/text_Nombre"
-                android:textAlignment="viewStart"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/txtNombre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:hint="@string/desc_Nombre"
-                android:inputType="textPersonName"
-                android:text=""
-                android:autofillHints="" />
-
-
-            <TextView
-                android:id="@+id/textFechaDescubrimiento"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="25dp"
-                android:text="@string/text_FechaDescubrimiento"
-                android:textAlignment="viewStart"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
-                android:orientation="horizontal"
-                >
-
-
-
-                <EditText
-                    android:id="@+id/txtFecha"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:layout_weight="7"
-                    android:enabled="false"
-                    android:inputType="textPersonName"
-                    android:onClick="btnFecha_Clic"
-                    android:text="@string/desc_Fecha"
-                    android:autofillHints="" />
-
-                <ImageButton
-                    android:id="@+id/btnFechaAdd"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/app_name"
-                    android:onClick="btnFecha_Clic"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@mipmap/calendario" />
-
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/textAltura"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="25dp"
-                android:text="@string/text_Altura"
-                android:textAlignment="viewStart"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/txtAltura"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:hint="@string/desc_Altura"
-                android:inputType="numberDecimal"
-                android:text=""
-                android:autofillHints="" />
-
-            <TextView
-                android:id="@+id/textTipo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="25dp"
-                android:text="@string/text_TipoAnimal"
-                android:textAlignment="viewStart"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/spTipo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="10dp"/>
-
-            <TextView
-                android:id="@+id/textDescripcion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:layout_marginStart="10dp"
-                android:text="@string/text_Descripcion"
-                android:textAlignment="viewStart"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/txtDescripcion"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:ems="10"
-                android:hint="@string/desc_Descripcion"
-                android:inputType="textMultiLine"
-                android:text=""
-                android:textAlignment="textStart"
-                android:autofillHints="" />
+                android:layout_marginTop="20dp">
+            </include>
 
 
             <Button
@@ -211,8 +82,6 @@
                 app:layout_constraintHorizontal_bias="0.493"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnRegistrarEstudiante" />
-
-
 
         </LinearLayout>
     </ScrollView>

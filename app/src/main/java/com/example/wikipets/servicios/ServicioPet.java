@@ -69,6 +69,7 @@ public class ServicioPet {
         Pet pet = null;
         try{
             pet = searchPetsByID(petsUpdate.getId());
+            pet.setName(petsUpdate.getName());
             pet.setAnimalType(petsUpdate.getAnimalType());
             pet.setDescription(petsUpdate.getDescription());
             pet.setDiscoveredDate(petsUpdate.getDiscoveredDate());

@@ -56,7 +56,7 @@ public class GUIEditar extends AppCompatActivity {
         descripcion = (TextView) findViewById(R.id.txtDescripcion);
         fechaDescubrimiento = (TextView) findViewById(R.id.txtFecha);
         altura = (TextView) findViewById(R.id.txtAltura);
-        txtBusqueda = findViewById(R.id.txtBusquedaE);
+        txtBusqueda = findViewById(R.id.txtBusqueda);
         idMascota = -1;
 
         layoutBusqueda = findViewById(R.id.layoutBusqueda);

@@ -30,7 +30,7 @@
     <string name="desc_Fecha">01/03/2021</string>
     <string name="desc_Altura">Ingrese la altura del animal (m)</string>
     <string name="desc_Descripcion">Ingrese una breve descripción</string>
-    <string name="text_BuscarMascota">Buscar mascota:</string>
+    <string name="text_BuscarMascota">Buscar animal:</string>
     <string name="desc_IngreseNombre">Ingrese el nombre</string>
     <string name="text_Cancelar">Cancelar</string>
     <string name="text_Actualizar">Actualizar</string>
