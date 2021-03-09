@@ -1,13 +1,18 @@
 package com.example.wikipets;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.wikipets.adaptadores.AdaptadorPet;
 import com.example.wikipets.estructural.Pet;
 import com.example.wikipets.servicios.ServicioFuncionalidades;
 import com.example.wikipets.servicios.ServicioPet;
@@ -17,14 +22,33 @@ import java.util.ArrayList;
 public class GUIListar extends AppCompatActivity {
 
     private TextView lista;
-    
+
+    private ListView listaPets;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_g_u_i_listar);
 
-        lista = (TextView) findViewById(R.id.txtResultado);
+        ArrayList<String> animales;
+        listaPets = (ListView) findViewById(R.id.lstListaAnimales);
+        AdaptadorPet adaptadorPet = new AdaptadorPet(this, R.layout.item_list, ServicioPet.getPets());
+        listaPets.setAdapter(adaptadorPet);
+
+        listaPets.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //Toast.makeText(getApplicationContext(), ""+i, Toast.LENGTH_SHORT).show();
+                detallesAnimal(i);
+            }
+        });
+    }
+
+    private void detallesAnimal(int idMascotaArray){
+        Intent intent = new Intent(this, GUIDetalles.class);
+        intent.putExtra("ANIMAL", idMascotaArray);
+        startActivity(intent);
     }
 
     public void btnListar_Click (View view){

@@ -2,6 +2,8 @@ package com.example.wikipets.servicios;
 
 import android.widget.Spinner;
 
+import com.example.wikipets.R;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,8 +41,27 @@ public class ServicioFuncionalidades {
                 return i;
             }
         }
-
         return 0;
+    }
+
+    public static int getImageTipoAnimal(String tipo){
+        switch (tipo){
+            case "MAMIFERO":
+                return R.drawable.mamifero;
+            case "AVE":
+                return R.drawable.ave;
+            case "ANFIBIO":
+                return R.drawable.anfibio;
+            case "REPTIL":
+                return R.drawable.reptil;
+            case "PECES":
+                return R.drawable.peces;
+            case "ARACNIDOS":
+                return R.drawable.aracnido;
+            case "MOLUSCOS":
+                return R.drawable.molusco;
+        }
+        return R.drawable.fault;
     }
 
 }

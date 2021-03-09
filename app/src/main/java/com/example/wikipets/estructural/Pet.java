@@ -1,5 +1,7 @@
 package com.example.wikipets.estructural;
 
+import com.example.wikipets.R;
+
 import java.util.Date;
 
 public class Pet {
@@ -10,6 +12,7 @@ public class Pet {
     private String description;
     private double height;
     private String animalType;
+    private int icon;
 
     public Pet(int id, String name, Date discoveredDate, String description, double height, String animalType) {
         this.name = name;
@@ -18,6 +21,17 @@ public class Pet {
         this.height = height;
         this.animalType = animalType;
         this.id = id;
+        this.icon = R.drawable.fault;
+    }
+
+    public Pet(String name, Date discoveredDate, String description, double height, String animalType, int pIcon) {
+        this.name = name;
+        this.discoveredDate = discoveredDate;
+        this.description = description;
+        this.height = height;
+        this.animalType = animalType;
+        this.id = id;
+        this.icon = pIcon;
     }
 
     public Pet(String name, Date discoveredDate, String description, double height, String animalType) {
@@ -26,6 +40,7 @@ public class Pet {
         this.description = description;
         this.height = height;
         this.animalType = animalType;
+        this.icon = R.drawable.fault;
     }
 
     public int getId() {
@@ -76,15 +91,9 @@ public class Pet {
         this.animalType = animalType;
     }
 
-    public enum ANIMAL_TYPE{
-        AVE,
-        MAMIFERO,
-        ANFIBIO,
-        REPTIL,
-        PECES,
-        ARACNIDOS,
-        MOLUSCOS
-    }
+    public int getIcon() { return icon; }
+
+    public void setIcon(int icon) { this.icon = icon; }
 
     @Override
     public String toString() {

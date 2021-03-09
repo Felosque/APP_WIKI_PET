@@ -35,4 +35,5 @@
     <string name="text_Cancelar">Cancelar</string>
     <string name="text_Actualizar">Actualizar</string>
     <string name="title_EliminarMascota">ELIMINAR ANIMAL</string>
+    <string name="text_Detalle">DETALLE ANIMAL</string>
 </resources>

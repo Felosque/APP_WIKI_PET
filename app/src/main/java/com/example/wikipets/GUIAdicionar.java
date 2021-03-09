@@ -70,8 +70,9 @@ public class GUIAdicionar extends AppCompatActivity {
             String textoDes = descripcion.getText().toString();
             Double textoAltura = Double.parseDouble(altura.getText().toString());
             String textoTipo = spnTipo.getSelectedItem().toString();
+            int imagenTipo = ServicioFuncionalidades.getImageTipoAnimal(textoTipo);
 
-            Pet nuevoPet = new Pet(textoNombre, textoFecha, textoDes, textoAltura, textoTipo);
+            Pet nuevoPet = new Pet(textoNombre, textoFecha, textoDes, textoAltura, textoTipo, imagenTipo);
             ServicioPet.addPets(nuevoPet);
             Toast.makeText(this, "Se registró correctamente la mascota", Toast.LENGTH_LONG).show();
 

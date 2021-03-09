@@ -9,13 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ActividadesEstructural">
-        <activity android:name="com.example.wikipets.GUIListar"></activity>
-        <activity android:name="com.example.wikipets.GUIBuscar" />
-        <activity android:name="com.example.wikipets.GUIEditar" />
-        <activity android:name="com.example.wikipets.GUIEliminar" />
-        <activity android:name="com.example.wikipets.GUIAdicionar" />
-        <activity android:name="com.example.wikipets.GUIMenu" />
-        <activity android:name="com.example.wikipets.MainActivity">
+        <activity android:name=".GUIDetalles"></activity>
+        <activity android:name=".GUIListar" />
+        <activity android:name=".GUIBuscar" />
+        <activity android:name=".GUIEditar" />
+        <activity android:name=".GUIEliminar" />
+        <activity android:name=".GUIAdicionar" />
+        <activity android:name=".GUIMenu" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

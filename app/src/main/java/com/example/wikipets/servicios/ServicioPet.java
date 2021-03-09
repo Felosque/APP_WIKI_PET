@@ -42,6 +42,14 @@ public class ServicioPet {
 
     }
 
+    public static Pet searchPetsByIDArray(int pId) throws Exception {
+        try {
+            return pets.get(pId);
+        }catch (Exception e){
+            throw new Exception("Error al cargar la mascota.");
+        }
+    }
+
     public static Pet searchPetsByID(int pId) {
         Pet pet = null;
         for (Pet petx : pets) {
@@ -51,11 +59,18 @@ public class ServicioPet {
             }
         }
         return pet;
-
     }
 
     public static ArrayList<Pet> getPets(){
         return pets;
+    }
+
+    public static ArrayList<String> getPetsByNames(){
+        ArrayList<String> listaDeAnimales = new ArrayList<>();
+        for (Pet i : pets){
+            listaDeAnimales.add(i.getName());
+        }
+        return listaDeAnimales;
     }
 
     public static boolean updatePet(Pet petsUpdate) throws Exception {

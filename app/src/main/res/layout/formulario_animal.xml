@@ -68,14 +68,15 @@
                 android:text="@string/desc_Fecha" />
 
             <ImageButton
-                android:id="@+id/btnFechaAdd"
+                android:id="@+id/btnFechaForm"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="@string/app_name"
                 android:onClick="btnFecha_Clic"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/calendario" />
+                android:src="@mipmap/calendario"
+                android:visibility="visible" />
 
 
         </LinearLayout>
@@ -139,7 +140,7 @@
         <EditText
             android:id="@+id/txtDescripcion"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:ems="10"
