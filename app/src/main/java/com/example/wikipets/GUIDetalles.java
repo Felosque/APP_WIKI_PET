@@ -1,9 +1,13 @@
 package com.example.wikipets;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -32,6 +36,37 @@ public class GUIDetalles extends AppCompatActivity {
 
     private Spinner spnTipo;
 
+    private Pet animal;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_detalle_opciones, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent;
+
+        switch (item.getItemId()){
+            case R.id.itemEditar:
+                intent = new Intent(this, GUIEditar.class);
+                intent.putExtra("ANIMAL", animal.getName());
+                startActivity(intent);
+                finish();
+                return true;
+
+            case R.id.itemEliminar:
+                intent = new Intent(this, GUIEliminar.class);
+                intent.putExtra("ANIMAL", animal.getName());
+                startActivity(intent);
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +76,7 @@ public class GUIDetalles extends AppCompatActivity {
         try{
             Intent intent = getIntent();
             int cad = intent.getIntExtra("ANIMAL", -1);
-            Pet animal = ServicioPet.searchPetsByIDArray(cad);
+            animal = ServicioPet.searchPetsByIDArray(cad);
 
 
             imgDetalle = (ImageView) findViewById(R.id.imgDetalle);
@@ -77,6 +112,9 @@ public class GUIDetalles extends AppCompatActivity {
         }catch (Exception e){
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
+
+
+
 
     }
 

@@ -45,6 +45,14 @@ public class GUIListar extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        AdaptadorPet adaptadorPet = new AdaptadorPet(this, R.layout.item_list, ServicioPet.getPets());
+        listaPets.setAdapter(adaptadorPet);
+    }
+
     private void detallesAnimal(int idMascotaArray){
         Intent intent = new Intent(this, GUIDetalles.class);
         intent.putExtra("ANIMAL", idMascotaArray);

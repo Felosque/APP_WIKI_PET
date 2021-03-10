@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ActividadesEstructural">
-        <activity android:name=".GUIDetalles"></activity>
+        <activity android:name=".GUIGrafica"></activity>
+        <activity android:name=".GUIDetalles" />
         <activity android:name=".GUIListar" />
         <activity android:name=".GUIBuscar" />
         <activity android:name=".GUIEditar" />

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/itemPai"
+        android:title="Gráfica de barras"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/itemBar"
+        android:title="Gráfica de pastel"
+        app:showAsAction="never"/>
+
+</menu>

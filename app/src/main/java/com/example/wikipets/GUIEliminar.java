@@ -3,6 +3,7 @@ package com.example.wikipets;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -31,11 +32,16 @@ public class GUIEliminar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_g_u_i_eliminar);
 
+        Intent intent = getIntent();
+        String cad = intent.getStringExtra("ANIMAL");
+
         layoutBusqueda = findViewById(R.id.layoutBusqueda);
         layoutResultado = findViewById(R.id.layoutResultado);
         txtBusqueda = findViewById(R.id.txtBusqueda);
         txtResultado = findViewById(R.id.txtMultiLine);
 
+        if(!cad.isEmpty())
+            txtBusqueda.setText(cad);
     }
 
     public void btnCancelar_Click(View view){

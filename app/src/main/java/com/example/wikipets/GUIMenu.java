@@ -22,6 +22,7 @@ public class GUIMenu extends AppCompatActivity {
 
     public void btnDel_Click (View view) {
         Intent intent = new Intent(this, GUIEliminar.class);
+        intent.putExtra("ANIMAL", "");
         startActivity(intent);
     }
 
@@ -32,6 +33,7 @@ public class GUIMenu extends AppCompatActivity {
 
     public void btnEditar_Click (View view) {
         Intent intent = new Intent(this, GUIEditar.class);
+        intent.putExtra("ANIMAL", "");
         startActivity(intent);
     }
 
@@ -40,8 +42,9 @@ public class GUIMenu extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void btnVolver_Click (View view) {
-        finish();
+    public void btnGrafica_Click (View view) {
+        Intent intent = new Intent(this, GUIGrafica.class);
+        startActivity(intent);
     }
 
 }

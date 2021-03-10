@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -52,6 +53,9 @@ public class GUIEditar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_g_u_i_editar);
 
+        Intent intent = getIntent();
+        String cad = intent.getStringExtra("ANIMAL");
+
         nombre = (TextView) findViewById(R.id.txtNombre);
         descripcion = (TextView) findViewById(R.id.txtDescripcion);
         fechaDescubrimiento = (TextView) findViewById(R.id.txtFecha);
@@ -66,6 +70,9 @@ public class GUIEditar extends AppCompatActivity {
         ArrayAdapter adaptador = new ArrayAdapter(this, android.R.layout.simple_spinner_item, ServicioFuncionalidades.tiposAnimal);
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnTipo.setAdapter(adaptador);
+
+        if(!cad.isEmpty())
+            txtBusqueda.setText(cad);
     }
 
     public void btnVolver_Click (View view) {
