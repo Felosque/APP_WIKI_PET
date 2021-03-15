@@ -102,6 +102,8 @@ public class GUIGrafica extends AppCompatActivity {
         PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
         //setting text size of the value
         pieDataSet.setValueTextSize(12f);
+
+        pieDataSet.setValueTextColor(Color.WHITE);
         //providing color list for coloring different entries
         pieDataSet.setColors(colors);
         //grouping the data set from entry to chart
@@ -112,7 +114,7 @@ public class GUIGrafica extends AppCompatActivity {
         pieChart.setData(pieData);
 
         Description description = new Description();
-        description.setText("Cantidad de animales por tipo.");
+        description.setText("");
         pieChart.setDescription(description);
         pieChart.invalidate();
     }
@@ -123,22 +125,10 @@ public class GUIGrafica extends AppCompatActivity {
         if (pieChart.getVisibility() != View.GONE) {
             pieChart.setVisibility(View.GONE);
         }
-        ArrayList<Double> valueList = new ArrayList<Double>();
-        ArrayList<BarEntry> entries = new ArrayList<>();
-        String title = "Title";
 
-        //input data
-        for(int i = 0; i < 6; i++){
-            valueList.add(i * 100.1);
-        }
+        ArrayList<BarDataSet> barDataSets = new ArrayList<>();
+        BarData data = new BarData();
 
-        //fit the data into a bar
-        for (int i = 0; i < valueList.size(); i++) {
-            BarEntry barEntry = new BarEntry(i, valueList.get(i).floatValue());
-            entries.add(barEntry);
-        }
-
-        BarDataSet barDataSet = new BarDataSet(entries, title);
         ArrayList<Integer> colors = new ArrayList<>();
         colors.add(Color.parseColor("#304567"));
         colors.add(Color.parseColor("#309967"));
@@ -147,9 +137,25 @@ public class GUIGrafica extends AppCompatActivity {
         colors.add(Color.parseColor("#a35567"));
         colors.add(Color.parseColor("#ff5f67"));
         colors.add(Color.parseColor("#3ca567"));
-        barDataSet.setColors(colors);
 
-        BarData data = new BarData(barDataSet);
+        Map<String, Integer> typeAmountMap = ServicioPet.getQuantityPetsOfType();
+        int i = 0;
+        for (Map.Entry<String, Integer> entry : typeAmountMap.entrySet()) {
+            System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+            ArrayList<BarEntry> entries = new ArrayList<>();
+            BarEntry barEntry = new BarEntry(i, entry.getValue());
+            entries.add(barEntry);
+
+            BarDataSet barDataSet = new BarDataSet(entries, entry.getKey());
+            barDataSet.setColors(colors.get(i));
+
+            data.addDataSet(barDataSet);
+            i++;
+        }
+
+        Description description = new Description();
+        description.setText("");
+        barChart.setDescription(description);
         barChart.setData(data);
         barChart.invalidate();
     }

@@ -77,7 +77,10 @@ public class ServicioPet {
     public static Map<String, Integer> getQuantityPetsOfType(){
         Map<String, Integer> typeAmountMap = new HashMap<>();
         for (String type : ServicioFuncionalidades.tiposAnimal){
-            typeAmountMap.put(type,getQuantityPet(type));
+            int quantity = getQuantityPet(type);
+            if(quantity > 0) {
+                typeAmountMap.put(type, quantity);
+            }
         }
         return  typeAmountMap;
     }
