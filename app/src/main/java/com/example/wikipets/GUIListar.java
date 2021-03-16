@@ -60,7 +60,7 @@ public class GUIListar extends AppCompatActivity {
     }
 
     public void btnListar_Click (View view){
-        try {
+        /*try {
             ArrayList<Pet> busqueda = ServicioPet.getPets();
             if (!busqueda.isEmpty()){
                 String txtBusqueda = "";
@@ -79,7 +79,7 @@ public class GUIListar extends AppCompatActivity {
             }
         }catch (Exception e){
             Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG ).show();
-        }
+        }*/
     }
 
     public void btnVolver_Click (View view) {
