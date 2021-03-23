@@ -12,9 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wikipets.estructural.Pet;
+import com.example.wikipets.estructural.TipoAnimal;
 import com.example.wikipets.servicios.ServicioFuncionalidades;
 import com.example.wikipets.servicios.ServicioPet;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -43,17 +45,23 @@ public class GUIAdicionar extends AppCompatActivity {
         descripcion = (TextView) findViewById(R.id.txtDescripcion);
         fechaDescubrimiento = (TextView) findViewById(R.id.txtFecha);
         altura = (TextView) findViewById(R.id.txtAltura);
-
         spnTipo = (Spinner) findViewById(R.id.spTipo);
-        ArrayAdapter adaptador = new ArrayAdapter(this, android.R.layout.simple_spinner_item, ServicioFuncionalidades.tiposAnimal);
-        adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnTipo.setAdapter(adaptador);
+        loadAnimals();
     }
 
     public void btnFecha_Clic(View view){
         mostrarCalendario(view);
     }
 
+    public void loadAnimals(){
+        ArrayList<String> typeAnimals;
+        TipoAnimal.loadAnimals();
+        typeAnimals = TipoAnimal.getTypeAnimal();
+
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,typeAnimals);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnTipo.setAdapter(adapter);
+    }
 
     public void btnRegitrar_Click (View view) {
         try{

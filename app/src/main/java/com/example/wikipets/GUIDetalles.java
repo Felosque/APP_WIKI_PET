@@ -17,8 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wikipets.estructural.Pet;
+import com.example.wikipets.estructural.TipoAnimal;
 import com.example.wikipets.servicios.ServicioFuncionalidades;
 import com.example.wikipets.servicios.ServicioPet;
+
+import java.util.ArrayList;
 
 public class GUIDetalles extends AppCompatActivity {
 
@@ -99,11 +102,19 @@ public class GUIDetalles extends AppCompatActivity {
             altura.setText(String.valueOf(animal.getHeight()));
 
             spnTipo = (Spinner) findViewById(R.id.spTipo);
-            ArrayAdapter adaptador = new ArrayAdapter(this, android.R.layout.simple_spinner_item, ServicioFuncionalidades.tiposAnimal);
-            adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spnTipo.setAdapter(adaptador);
+            ArrayList<String> typeAnimals;
+            TipoAnimal.loadAnimals();
+            typeAnimals = TipoAnimal.getTypeAnimal();
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,typeAnimals);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spnTipo.setAdapter(adapter);
             spnTipo.setEnabled(false);
-            spnTipo.setSelection(ServicioFuncionalidades.getIndexSpinnerValue(spnTipo, animal.getAnimalType()));
+            spnTipo.setSelection(TipoAnimal.getIndexSpinnerValue(spnTipo, animal.getAnimalType()));
+            //ArrayAdapter adaptador = new ArrayAdapter(this, android.R.layout.simple_spinner_item, ServicioFuncionalidades.tiposAnimal);
+            //adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            //spnTipo.setAdapter(adaptador);
+            //spnTipo.setEnabled(false);
+            //spnTipo.setSelection(ServicioFuncionalidades.getIndexSpinnerValue(spnTipo, animal.getAnimalType()));
 
             btnFecha = (ImageButton) findViewById(R.id.btnFechaForm);
             btnFecha.setVisibility(View.GONE);

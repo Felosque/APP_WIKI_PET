@@ -1,6 +1,7 @@
 package com.example.wikipets.servicios;
 
 import com.example.wikipets.estructural.Pet;
+import com.example.wikipets.estructural.TipoAnimal;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -76,7 +77,7 @@ public class ServicioPet {
 
     public static Map<String, Integer> getQuantityPetsOfType(){
         Map<String, Integer> typeAmountMap = new HashMap<>();
-        for (String type : ServicioFuncionalidades.tiposAnimal){
+        for (String type : TipoAnimal.getTypeAnimal()){
             int quantity = getQuantityPet(type);
             if(quantity > 0) {
                 typeAmountMap.put(type, quantity);

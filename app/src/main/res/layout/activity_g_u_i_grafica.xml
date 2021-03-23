@@ -32,7 +32,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:lineSpacingExtra="8sp"
-                android:text="GRAFICA"
+                android:text="@string/text_Grafica"
                 android:textAlignment="center"
                 android:textColor="@color/green"
                 android:textSize="18sp"
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:lineSpacingExtra="0sp"
-                android:text="Cantidad de animales por tipo"
+                android:text="@string/desc_grafica"
                 android:textAlignment="center"
                 android:textColor="@color/green"
                 android:textSize="11sp" />

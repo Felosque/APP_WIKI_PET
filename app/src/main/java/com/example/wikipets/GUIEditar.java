@@ -16,9 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wikipets.estructural.Pet;
+import com.example.wikipets.estructural.TipoAnimal;
 import com.example.wikipets.servicios.ServicioFuncionalidades;
 import com.example.wikipets.servicios.ServicioPet;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -67,9 +69,13 @@ public class GUIEditar extends AppCompatActivity {
         layoutResultado = findViewById(R.id.layoutEdicion);
 
         spnTipo = (Spinner) findViewById(R.id.spTipo);
-        ArrayAdapter adaptador = new ArrayAdapter(this, android.R.layout.simple_spinner_item, ServicioFuncionalidades.tiposAnimal);
-        adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnTipo.setAdapter(adaptador);
+        ArrayList<String> typeAnimals;
+        TipoAnimal.loadAnimals();
+        typeAnimals = TipoAnimal.getTypeAnimal();
+
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,typeAnimals);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnTipo.setAdapter(adapter);
 
         if(!cad.isEmpty())
             txtBusqueda.setText(cad);

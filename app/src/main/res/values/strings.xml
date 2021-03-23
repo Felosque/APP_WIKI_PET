@@ -36,4 +36,12 @@
     <string name="text_Actualizar">Actualizar</string>
     <string name="title_EliminarMascota">ELIMINAR ANIMAL</string>
     <string name="text_Detalle">DETALLE ANIMAL</string>
+    <string name="text_Grafica">GRÁFICA</string>
+    <string name="desc_grafica">Cantidad de animales por tipo</string>
+    <string name="txtNombreList">Nombre</string>
+    <string name="txtAlturaList">Altura</string>
+    <string name="txtDescList">Descripción</string>
+    <string name="txtGatoDegenerado">Gato degenerado</string>
+    <string name="txtAltura">123 metros</string>
+    <string name="txtEstaEs">Esta es una buena descripción ehhh...</string>
 </resources>

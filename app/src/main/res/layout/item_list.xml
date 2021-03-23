@@ -31,17 +31,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:textStyle="bold"
-                android:text="Nombre: "
-                />
+                android:text="@string/txtNombreList"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/lsvNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Gato degenerado"
-                />
+                android:text="@string/txtGatoDegenerado" />
 
         </LinearLayout>
 
@@ -55,17 +53,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:textStyle="bold"
-                android:text="Altura: "
-                />
+                android:text="@string/txtAlturaList"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/lsvAltura"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="123 metros"
-                />
+                android:text="@string/txtAltura" />
         </LinearLayout>
 
         <LinearLayout
@@ -78,17 +74,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:textStyle="bold"
-                android:text="Descripcion: "
-                />
+                android:text="@string/txtDescList"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/lsvDescripcion"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Esta es una buena descripción ehhh..."
-                />
+                android:text="@string/txtEstaEs" />
 
         </LinearLayout>
 
