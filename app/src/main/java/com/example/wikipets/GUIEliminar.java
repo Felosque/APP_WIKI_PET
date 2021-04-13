@@ -7,13 +7,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wikipets.estructural.Pet;
+import com.example.wikipets.estructural.TipoAnimal;
 import com.example.wikipets.servicios.ServicioFuncionalidades;
 import com.example.wikipets.servicios.ServicioPet;
+
+import java.util.ArrayList;
 
 public class GUIEliminar extends AppCompatActivity {
 
@@ -24,7 +30,17 @@ public class GUIEliminar extends AppCompatActivity {
 
     private TextView txtBusqueda;
 
-    private TextView txtResultado;
+    private TextView nombre;
+
+    private TextView descripcion;
+
+    private TextView fechaDescubrimiento;
+
+    private TextView altura;
+
+    private ImageButton btnFecha;
+
+    private Spinner spnTipo;
 
 
     @Override
@@ -38,7 +54,6 @@ public class GUIEliminar extends AppCompatActivity {
         layoutBusqueda = findViewById(R.id.layoutBusqueda);
         layoutResultado = findViewById(R.id.layoutResultado);
         txtBusqueda = findViewById(R.id.txtBusqueda);
-        txtResultado = findViewById(R.id.txtMultiLine);
 
         if(!cad.isEmpty())
             txtBusqueda.setText(cad);
@@ -57,16 +72,36 @@ public class GUIEliminar extends AppCompatActivity {
             if (busqueda != null){
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(txtBusqueda.getWindowToken(), 0);
-
-                String texto = "MASCOTA N°-: " + busqueda.getId() + "\n" +
-                        "Nombre: " + busqueda.getName() + "\n"+
-                        "Fecha: " + ServicioFuncionalidades.dateToString(busqueda.getDiscoveredDate()) + "\n"+
-                        "Altura: " + busqueda.getHeight() + "\n"+
-                        "Tipo: " + busqueda.getAnimalType() + "\n"+
-                        "Descripción: " + busqueda.getDescription() + "\n\n";
-
-                txtResultado.setText(texto);
                 visibleResultados(view,true);
+
+                nombre = (TextView) findViewById(R.id.txtNombre);
+                nombre.setEnabled(false);
+                nombre.setText(busqueda.getName());
+
+                descripcion = (TextView) findViewById(R.id.txtDescripcion);
+                descripcion.setEnabled(false);
+                descripcion.setText(busqueda.getDescription());
+
+                fechaDescubrimiento = (TextView) findViewById(R.id.txtFecha);
+                fechaDescubrimiento.setEnabled(false);
+                fechaDescubrimiento.setText(ServicioFuncionalidades.dateToString(busqueda.getDiscoveredDate()));
+
+                altura = (TextView) findViewById(R.id.txtAltura);
+                altura.setEnabled(false);
+                altura.setText(String.valueOf(busqueda.getHeight()));
+
+                spnTipo = (Spinner) findViewById(R.id.spTipo);
+                ArrayList<String> typeAnimals;
+                TipoAnimal.loadAnimals();
+                typeAnimals = TipoAnimal.getTypeAnimal();
+                ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,typeAnimals);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spnTipo.setAdapter(adapter);
+                spnTipo.setEnabled(false);
+                spnTipo.setSelection(TipoAnimal.getIndexSpinnerValue(spnTipo, busqueda.getAnimalType()));
+
+                btnFecha = (ImageButton) findViewById(R.id.btnFechaForm);
+                btnFecha.setVisibility(View.GONE);
             }else {
                 Toast.makeText(this, "No se encontró ninguna mascota.", Toast.LENGTH_LONG ).show();
             }

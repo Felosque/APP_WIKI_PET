@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ServicioPersistencia {
 
@@ -112,13 +113,13 @@ public class ServicioPersistencia {
     }
 
     public static boolean delete(String pName){
-        boolean delete = false;
+        /*boolean delete = false;
         File archivo;
         RandomAccessFile raf;
-        archivo = new File(directorio, nombreArchivo);
+        archivo = new File(directorio, nombreArchivo);*/
 
         try {
-            raf = new RandomAccessFile(archivo, "rw");
+            /*raf = new RandomAccessFile(archivo, "rw");
             Long pos = getPointerPosByName(pName);
             if(pos != null) {
                 pos += (getRegisterSize() - (STATUS_SIZE + 2));
@@ -126,14 +127,25 @@ public class ServicioPersistencia {
                 raf.writeUTF(setStringSize("DL", STATUS_SIZE));
                 delete = true;
             }
-            raf.close();
+            raf.close();*/
+
+            Pet petDelete = new Pet();
+            petDelete.setName("NONE");
+            petDelete.setDiscoveredDate(new Date());
+            petDelete.setDescription("NONE");
+            petDelete.setHeight(-1);
+            petDelete.setAnimalType("NONE");
+            petDelete.setIcon(-1);
+            petDelete.setStatus("DL");
+            return update(pName, petDelete);
+
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        return delete;
+        return false;
     }
 
-    public static boolean update(Pet pet){
+    public static boolean update(String name, Pet pet){
         boolean update = false;
         File archivo;
         RandomAccessFile raf;
@@ -141,7 +153,7 @@ public class ServicioPersistencia {
 
         try {
             raf = new RandomAccessFile(archivo, "rw");
-            Long pos = getPointerPosByName(pet.getName());
+            Long pos = getPointerPosByName(name);
             if(pos != null) {
                 raf.seek(pos);
                 raf.writeUTF( setStringSize(pet.getName(), NAME_SIZE) );

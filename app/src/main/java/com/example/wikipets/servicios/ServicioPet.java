@@ -80,8 +80,9 @@ public class ServicioPet {
     }
 
     public static boolean updatePet(Pet petsUpdate) throws Exception {
+
         try{
-            return ServicioPersistencia.update(petsUpdate);
+            return ServicioPersistencia.update(petsUpdate.getName(), petsUpdate);
         }catch (Exception e){
             throw new Exception("Error al actualizar al animal. No se ha encontrado.");
         }

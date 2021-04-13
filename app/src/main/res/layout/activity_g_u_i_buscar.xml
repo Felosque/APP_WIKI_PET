@@ -54,22 +54,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"/>
 
-            <EditText
-                android:id="@+id/txtMultiLine"
+            <LinearLayout
+                android:id="@+id/layoutFormulario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:autofillHints=""
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:hint=""
-                android:ems="10"
-                android:enabled="false"
-                android:inputType="textMultiLine"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtBusqueda" />
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/formulario_animal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btnVolver"
