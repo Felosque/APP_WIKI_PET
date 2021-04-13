@@ -44,4 +44,5 @@
     <string name="txtGatoDegenerado">Gato degenerado</string>
     <string name="txtAltura">123 metros</string>
     <string name="txtEstaEs">Esta es una buena descripción ehhh...</string>
+    <string name="nombreArchivo">saveData.txt</string>
 </resources>

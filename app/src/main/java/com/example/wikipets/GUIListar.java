@@ -37,8 +37,13 @@ public class GUIListar extends AppCompatActivity {
 
         ArrayList<String> animales;
         listaPets = (ListView) findViewById(R.id.lstListaAnimales);
-        AdaptadorPet adaptadorPet = new AdaptadorPet(this, R.layout.item_list, ServicioPet.getPets());
-        listaPets.setAdapter(adaptadorPet);
+        AdaptadorPet adaptadorPet = null;
+        try {
+            adaptadorPet = new AdaptadorPet(this, R.layout.item_list, ServicioPet.getPets());
+            listaPets.setAdapter(adaptadorPet);
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG ).show();
+        }
 
         listaPets.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -72,7 +77,12 @@ public class GUIListar extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        AdaptadorPet adaptadorPet = new AdaptadorPet(this, R.layout.item_list, ServicioPet.getPets());
+        AdaptadorPet adaptadorPet = null;
+        try {
+            adaptadorPet = new AdaptadorPet(this, R.layout.item_list, ServicioPet.getPets());
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG ).show();
+        }
         listaPets.setAdapter(adaptadorPet);
     }
 

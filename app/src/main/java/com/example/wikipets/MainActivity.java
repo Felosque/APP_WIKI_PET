@@ -5,11 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.wikipets.estructural.Pet;
 import com.example.wikipets.servicios.ServicioFuncionalidades;
+import com.example.wikipets.servicios.ServicioPersistencia;
 import com.example.wikipets.servicios.ServicioPet;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btnIngresar_Click (View view) {
-        try {
+        /*try {
             int mami = ServicioFuncionalidades.getImageTipoAnimal("MAMIFERO");
             int ave  = ServicioFuncionalidades.getImageTipoAnimal("AVE");
             int anfi = ServicioFuncionalidades.getImageTipoAnimal("ANFIBIO");
@@ -43,7 +47,33 @@ public class MainActivity extends AppCompatActivity {
             ServicioPet.addPets(new Pet("Ostra", new Date(), "La desc corta", 2, "MOLUSCOS", mol));
         }catch (Exception e){
 
+        }*/
+
+
+        try {
+            File archivo = new File(getApplicationContext().getFilesDir() + "/" + getString(R.string.nombreArchivo));
+            boolean estatus = archivo.exists();
+            if(estatus) {
+                Toast.makeText(getApplicationContext(), "Borrado", Toast.LENGTH_LONG);
+            }else {
+                try {
+                    // A partir del objeto File creamos el fichero físicamente
+                    if (archivo.createNewFile()) {
+                        System.out.println("El fichero se ha creado correctamente");
+                    }
+                    else {
+                        System.out.println("No ha podido ser creado el fichero");
+                    }
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                }
+            }
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG);
         }
+
+        ServicioPersistencia.setDirectorio(getApplicationContext().getFilesDir());
+        ServicioPersistencia.setNombreArchivo(getString(R.string.nombreArchivo));
         Intent intent = new Intent(this, GUIMenu.class);
         startActivity(intent);
     }

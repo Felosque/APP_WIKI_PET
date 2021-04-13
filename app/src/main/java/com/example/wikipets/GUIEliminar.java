@@ -50,24 +50,28 @@ public class GUIEliminar extends AppCompatActivity {
     }
 
     public void btnBuscar_Click(View view){
-        String textBusqueda = txtBusqueda.getText().toString();
-        Pet busqueda = ServicioPet.searchPetsByName(textBusqueda);
+        try{
+            String textBusqueda = txtBusqueda.getText().toString();
+            Pet busqueda = ServicioPet.searchPetsByName(textBusqueda);
 
-        if (busqueda != null){
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(txtBusqueda.getWindowToken(), 0);
+            if (busqueda != null){
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(txtBusqueda.getWindowToken(), 0);
 
-            String texto = "MASCOTA N°-: " + busqueda.getId() + "\n" +
-                    "Nombre: " + busqueda.getName() + "\n"+
-                    "Fecha: " + ServicioFuncionalidades.dateToString(busqueda.getDiscoveredDate()) + "\n"+
-                    "Altura: " + busqueda.getHeight() + "\n"+
-                    "Tipo: " + busqueda.getAnimalType() + "\n"+
-                    "Descripción: " + busqueda.getDescription() + "\n\n";
+                String texto = "MASCOTA N°-: " + busqueda.getId() + "\n" +
+                        "Nombre: " + busqueda.getName() + "\n"+
+                        "Fecha: " + ServicioFuncionalidades.dateToString(busqueda.getDiscoveredDate()) + "\n"+
+                        "Altura: " + busqueda.getHeight() + "\n"+
+                        "Tipo: " + busqueda.getAnimalType() + "\n"+
+                        "Descripción: " + busqueda.getDescription() + "\n\n";
 
-            txtResultado.setText(texto);
-            visibleResultados(view,true);
-        }else {
-            Toast.makeText(this, "No se encontró ninguna mascota.", Toast.LENGTH_LONG ).show();
+                txtResultado.setText(texto);
+                visibleResultados(view,true);
+            }else {
+                Toast.makeText(this, "No se encontró ninguna mascota.", Toast.LENGTH_LONG ).show();
+            }
+        }catch (Exception e){
+
         }
     }
 

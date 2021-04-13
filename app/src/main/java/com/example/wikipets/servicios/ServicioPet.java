@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class ServicioPet {
 
-    private static final ArrayList <Pet> pets = new ArrayList<Pet>();
+    //private static final ArrayList <Pet> pets = new ArrayList<Pet>();
 
     private static int numRegistros = 0;
 
@@ -26,37 +26,37 @@ public class ServicioPet {
         }else {
             numRegistros++;
             pet.setId(numRegistros);
-            pets.add(pet);
+            //pets.add(pet);
+            ServicioPersistencia.add(pet);
         }
     }
 
     public static boolean deletePet(String name){
-        return pets.remove(searchPetsByName(name));
+        return false;
     }
 
-    public static Pet searchPetsByName(String name) {
+    public static Pet searchPetsByName(String name) throws Exception {
         Pet pet = null;
-        for (Pet petx : pets) {
+        for (Pet petx : getPets()) {
             if (petx.getName().toUpperCase().equals(name.toUpperCase())) {
                 pet = petx;
                 return pet;
             }
         }
         return pet;
-
     }
 
     public static Pet searchPetsByIDArray(int pId) throws Exception {
         try {
-            return pets.get(pId);
+            return ServicioPersistencia.findAll().get(pId);
         }catch (Exception e){
             throw new Exception("Error al cargar la mascota.");
         }
     }
 
-    public static Pet searchPetsByID(int pId) {
+    public static Pet searchPetsByID(int pId) throws Exception {
         Pet pet = null;
-        for (Pet petx : pets) {
+        for (Pet petx : getPets()) {
             if (petx.getId() == pId) {
                 pet = petx;
                 return pet;
@@ -66,16 +66,16 @@ public class ServicioPet {
     }
 
 
-    public static int getQuantityPet(String pType){
+    public static int getQuantityPet(String pType) throws Exception {
         int count = 0;
-        for (Pet pet : pets){
+        for (Pet pet : ServicioPersistencia.findAll()){
             if (pet.getAnimalType().equals(pType))
                 count++;
         }
         return count;
     }
 
-    public static Map<String, Integer> getQuantityPetsOfType(){
+    public static Map<String, Integer> getQuantityPetsOfType() throws Exception {
         Map<String, Integer> typeAmountMap = new HashMap<>();
         for (String type : TipoAnimal.getTypeAnimal()){
             int quantity = getQuantityPet(type);
@@ -86,13 +86,13 @@ public class ServicioPet {
         return  typeAmountMap;
     }
 
-    public static ArrayList<Pet> getPets(){
-        return pets;
+    public static ArrayList<Pet> getPets() throws Exception {
+        return ServicioPersistencia.findAll();
     }
 
-    public static ArrayList<String> getPetsByNames(){
+    public static ArrayList<String> getPetsByNames() throws Exception {
         ArrayList<String> listaDeAnimales = new ArrayList<>();
-        for (Pet i : pets){
+        for (Pet i : getPets()){
             listaDeAnimales.add(i.getName());
         }
         return listaDeAnimales;
@@ -100,7 +100,7 @@ public class ServicioPet {
 
     public static boolean updatePet(Pet petsUpdate) throws Exception {
 
-        for (Pet petx : pets) {
+        for (Pet petx : getPets()) {
             if (petx.getName().toUpperCase().equals(petsUpdate.getName().toUpperCase()) && petx.getId() != petsUpdate.getId()) {
                 throw new Exception("Se ha encontrado otro animal con el mismo nombre. ID: " + petx.getId());
             }

@@ -81,42 +81,47 @@ public class GUIGrafica extends AppCompatActivity {
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
 
         //initializing data
-        Map<String, Integer> typeAmountMap = ServicioPet.getQuantityPetsOfType();
+        try{
+            Map<String, Integer> typeAmountMap = ServicioPet.getQuantityPetsOfType();
 
-        //initializing colors for the entries
-        ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#304567"));
-        colors.add(Color.parseColor("#309967"));
-        colors.add(Color.parseColor("#476567"));
-        colors.add(Color.parseColor("#890567"));
-        colors.add(Color.parseColor("#a35567"));
-        colors.add(Color.parseColor("#ff5f67"));
-        colors.add(Color.parseColor("#3ca567"));
+            //initializing colors for the entries
+            ArrayList<Integer> colors = new ArrayList<>();
+            colors.add(Color.parseColor("#304567"));
+            colors.add(Color.parseColor("#309967"));
+            colors.add(Color.parseColor("#476567"));
+            colors.add(Color.parseColor("#890567"));
+            colors.add(Color.parseColor("#a35567"));
+            colors.add(Color.parseColor("#ff5f67"));
+            colors.add(Color.parseColor("#3ca567"));
 
-        //input data and fit data into pie chart entry
-        for(String type: typeAmountMap.keySet()){
-            pieEntries.add(new PieEntry(typeAmountMap.get(type).intValue(), type));
+            //input data and fit data into pie chart entry
+            for(String type: typeAmountMap.keySet()){
+                pieEntries.add(new PieEntry(typeAmountMap.get(type).intValue(), type));
+            }
+
+            //collecting the entries with label name
+            PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
+            //setting text size of the value
+            pieDataSet.setValueTextSize(12f);
+
+            pieDataSet.setValueTextColor(Color.WHITE);
+            //providing color list for coloring different entries
+            pieDataSet.setColors(colors);
+            //grouping the data set from entry to chart
+            PieData pieData = new PieData(pieDataSet);
+            //showing the value of the entries, default true if not set
+            //pieData.setDrawValues(true);
+
+            pieChart.setData(pieData);
+
+            Description description = new Description();
+            description.setText("");
+            pieChart.setDescription(description);
+            pieChart.invalidate();
+        }catch (Exception e){
+
         }
 
-        //collecting the entries with label name
-        PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
-        //setting text size of the value
-        pieDataSet.setValueTextSize(12f);
-
-        pieDataSet.setValueTextColor(Color.WHITE);
-        //providing color list for coloring different entries
-        pieDataSet.setColors(colors);
-        //grouping the data set from entry to chart
-        PieData pieData = new PieData(pieDataSet);
-        //showing the value of the entries, default true if not set
-        //pieData.setDrawValues(true);
-
-        pieChart.setData(pieData);
-
-        Description description = new Description();
-        description.setText("");
-        pieChart.setDescription(description);
-        pieChart.invalidate();
     }
 
     private void showBarChart(){
@@ -137,27 +142,31 @@ public class GUIGrafica extends AppCompatActivity {
         colors.add(Color.parseColor("#a35567"));
         colors.add(Color.parseColor("#ff5f67"));
         colors.add(Color.parseColor("#3ca567"));
+        try {
+            Map<String, Integer> typeAmountMap = ServicioPet.getQuantityPetsOfType();
+            int i = 0;
+            for (Map.Entry<String, Integer> entry : typeAmountMap.entrySet()) {
+                System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+                ArrayList<BarEntry> entries = new ArrayList<>();
+                BarEntry barEntry = new BarEntry(i, entry.getValue());
+                entries.add(barEntry);
 
-        Map<String, Integer> typeAmountMap = ServicioPet.getQuantityPetsOfType();
-        int i = 0;
-        for (Map.Entry<String, Integer> entry : typeAmountMap.entrySet()) {
-            System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
-            ArrayList<BarEntry> entries = new ArrayList<>();
-            BarEntry barEntry = new BarEntry(i, entry.getValue());
-            entries.add(barEntry);
+                BarDataSet barDataSet = new BarDataSet(entries, entry.getKey());
+                barDataSet.setColors(colors.get(i));
 
-            BarDataSet barDataSet = new BarDataSet(entries, entry.getKey());
-            barDataSet.setColors(colors.get(i));
+                data.addDataSet(barDataSet);
+                i++;
+            }
 
-            data.addDataSet(barDataSet);
-            i++;
+            Description description = new Description();
+            description.setText("");
+            barChart.setDescription(description);
+            barChart.setData(data);
+            barChart.invalidate();
+        }catch (Exception e){
+
         }
 
-        Description description = new Description();
-        description.setText("");
-        barChart.setDescription(description);
-        barChart.setData(data);
-        barChart.invalidate();
     }
 
     public void btnVolver_Click (View view) {

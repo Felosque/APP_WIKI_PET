@@ -123,22 +123,26 @@ public class GUIEditar extends AppCompatActivity {
     }
 
     public void btnBuscar_Click(View view){
-        String textBusqueda = txtBusqueda.getText().toString();
-        Pet busqueda = ServicioPet.searchPetsByName(textBusqueda);
+        try {
+            String textBusqueda = txtBusqueda.getText().toString();
+            Pet busqueda = ServicioPet.searchPetsByName(textBusqueda);
 
-        if (busqueda != null){
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(txtBusqueda.getWindowToken(), 0);
+            if (busqueda != null) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(txtBusqueda.getWindowToken(), 0);
 
-            this.idMascota = busqueda.getId();
-            this.nombre.setText(busqueda.getName());
-            this.altura.setText(""+busqueda.getHeight());
-            this.descripcion.setText(busqueda.getDescription());
-            this.fechaDescubrimiento.setText(ServicioFuncionalidades.dateToString(busqueda.getDiscoveredDate()));
-            this.spnTipo.setSelection(ServicioFuncionalidades.getIndexSpinnerValue(spnTipo, busqueda.getAnimalType()));
-            visibleResultados(view,true);
-        }else {
-            Toast.makeText(this, "No se encontró ninguna mascota.", Toast.LENGTH_LONG ).show();
+                this.idMascota = busqueda.getId();
+                this.nombre.setText(busqueda.getName());
+                this.altura.setText("" + busqueda.getHeight());
+                this.descripcion.setText(busqueda.getDescription());
+                this.fechaDescubrimiento.setText(ServicioFuncionalidades.dateToString(busqueda.getDiscoveredDate()));
+                this.spnTipo.setSelection(ServicioFuncionalidades.getIndexSpinnerValue(spnTipo, busqueda.getAnimalType()));
+                visibleResultados(view, true);
+            } else {
+                Toast.makeText(this, "No se encontró ninguna mascota.", Toast.LENGTH_LONG).show();
+            }
+        }catch (Exception e){
+
         }
     }
 

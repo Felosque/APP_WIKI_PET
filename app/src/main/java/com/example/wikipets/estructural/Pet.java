@@ -13,6 +13,7 @@ public class Pet {
     private double height;
     private String animalType;
     private int icon;
+    private String status;
 
     public Pet(int id, String name, Date discoveredDate, String description, double height, String animalType) {
         this.name = name;
@@ -41,6 +42,17 @@ public class Pet {
         this.height = height;
         this.animalType = animalType;
         this.icon = R.drawable.fault;
+    }
+
+    public Pet() {
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public int getId() {
