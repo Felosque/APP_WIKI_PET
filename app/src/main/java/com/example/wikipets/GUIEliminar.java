@@ -71,7 +71,7 @@ public class GUIEliminar extends AppCompatActivity {
                 Toast.makeText(this, "No se encontró ninguna mascota.", Toast.LENGTH_LONG ).show();
             }
         }catch (Exception e){
-
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG ).show();
         }
     }
 

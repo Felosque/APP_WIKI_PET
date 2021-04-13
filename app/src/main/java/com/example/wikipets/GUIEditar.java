@@ -133,6 +133,7 @@ public class GUIEditar extends AppCompatActivity {
 
                 this.idMascota = busqueda.getId();
                 this.nombre.setText(busqueda.getName());
+                this.nombre.setEnabled(false);
                 this.altura.setText("" + busqueda.getHeight());
                 this.descripcion.setText(busqueda.getDescription());
                 this.fechaDescubrimiento.setText(ServicioFuncionalidades.dateToString(busqueda.getDiscoveredDate()));

@@ -32,18 +32,11 @@ public class ServicioPet {
     }
 
     public static boolean deletePet(String name){
-        return false;
+        return ServicioPersistencia.delete(name);
     }
 
     public static Pet searchPetsByName(String name) throws Exception {
-        Pet pet = null;
-        for (Pet petx : getPets()) {
-            if (petx.getName().toUpperCase().equals(name.toUpperCase())) {
-                pet = petx;
-                return pet;
-            }
-        }
-        return pet;
+        return ServicioPersistencia.findByName(name);
     }
 
     public static Pet searchPetsByIDArray(int pId) throws Exception {
@@ -53,18 +46,6 @@ public class ServicioPet {
             throw new Exception("Error al cargar la mascota.");
         }
     }
-
-    public static Pet searchPetsByID(int pId) throws Exception {
-        Pet pet = null;
-        for (Pet petx : getPets()) {
-            if (petx.getId() == pId) {
-                pet = petx;
-                return pet;
-            }
-        }
-        return pet;
-    }
-
 
     public static int getQuantityPet(String pType) throws Exception {
         int count = 0;
@@ -99,22 +80,8 @@ public class ServicioPet {
     }
 
     public static boolean updatePet(Pet petsUpdate) throws Exception {
-
-        for (Pet petx : getPets()) {
-            if (petx.getName().toUpperCase().equals(petsUpdate.getName().toUpperCase()) && petx.getId() != petsUpdate.getId()) {
-                throw new Exception("Se ha encontrado otro animal con el mismo nombre. ID: " + petx.getId());
-            }
-        }
-
-        Pet pet = null;
         try{
-            pet = searchPetsByID(petsUpdate.getId());
-            pet.setName(petsUpdate.getName());
-            pet.setAnimalType(petsUpdate.getAnimalType());
-            pet.setDescription(petsUpdate.getDescription());
-            pet.setDiscoveredDate(petsUpdate.getDiscoveredDate());
-            pet.setHeight(petsUpdate.getHeight());
-            return true;
+            return ServicioPersistencia.update(petsUpdate);
         }catch (Exception e){
             throw new Exception("Error al actualizar al animal. No se ha encontrado.");
         }

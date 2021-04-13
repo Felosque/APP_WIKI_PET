@@ -32,6 +32,11 @@ public class ServicioPersistencia {
         return nombreArchivo;
     }
 
+    public static int getRegisterSize(){
+        return (NAME_SIZE + 2) + (DISCOVERED_DATE_SIZE + 2) + (DESCRIPTION_SIZE + 2) + (HEIGHT_SIZE + 2)
+                + (ANIMAL_TYPE_SIZE + 2)  + (ICON_SIZE + 2) + (STATUS_SIZE + 2);
+    }
+
     public static void setNombreArchivo(String nombreArchivo) {
         ServicioPersistencia.nombreArchivo = nombreArchivo;
     }
@@ -104,6 +109,114 @@ public class ServicioPersistencia {
             throw e;
         }
         return pets;
+    }
+
+    public static boolean delete(String pName){
+        boolean delete = false;
+        File archivo;
+        RandomAccessFile raf;
+        archivo = new File(directorio, nombreArchivo);
+
+        try {
+            raf = new RandomAccessFile(archivo, "rw");
+            Long pos = getPointerPosByName(pName);
+            if(pos != null) {
+                pos += (getRegisterSize() - (STATUS_SIZE + 2));
+                raf.seek(pos);
+                raf.writeUTF(setStringSize("DL", STATUS_SIZE));
+                delete = true;
+            }
+            raf.close();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return delete;
+    }
+
+    public static boolean update(Pet pet){
+        boolean update = false;
+        File archivo;
+        RandomAccessFile raf;
+        archivo = new File(directorio, nombreArchivo);
+
+        try {
+            raf = new RandomAccessFile(archivo, "rw");
+            Long pos = getPointerPosByName(pet.getName());
+            if(pos != null) {
+                raf.seek(pos);
+                raf.writeUTF( setStringSize(pet.getName(), NAME_SIZE) );
+                raf.writeUTF( setStringSize(ServicioFuncionalidades.dateToString(pet.getDiscoveredDate()), DISCOVERED_DATE_SIZE) );
+                raf.writeUTF( setStringSize(pet.getDescription(), DESCRIPTION_SIZE) );
+                raf.writeUTF( setStringSize( "" + pet.getHeight(), HEIGHT_SIZE) );
+                raf.writeUTF( setStringSize(pet.getAnimalType(), ANIMAL_TYPE_SIZE) );
+                pet.setIcon(ServicioFuncionalidades.getImageTipoAnimal(pet.getAnimalType()));
+                raf.writeUTF( setStringSize( "" + pet.getIcon(), ICON_SIZE) );
+                raf.writeUTF( setStringSize( pet.getStatus(), STATUS_SIZE) );
+                update = true;
+            }
+            raf.close();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return update;
+    }
+
+    public static Pet findByName(String pName) throws IOException {
+
+        File archivo;
+        RandomAccessFile raf;
+        archivo = new File(directorio, nombreArchivo);
+        Pet onePet = null;
+
+        try {
+            raf = new RandomAccessFile(archivo, "rw");
+            Long pos = getPointerPosByName(pName);
+            if(pos != null) {
+                raf.seek(getPointerPosByName(pName));
+                onePet = new Pet();
+                onePet.setName(raf.readUTF().trim());
+                onePet.setDiscoveredDate(ServicioFuncionalidades.ParseFecha(raf.readUTF().trim()));
+                onePet.setDescription(raf.readUTF().trim());
+                onePet.setHeight(Double.parseDouble(raf.readUTF().trim()));
+                onePet.setAnimalType("" + raf.readUTF().trim());
+                onePet.setIcon(Integer.parseInt(raf.readUTF().trim()));
+                onePet.setStatus(raf.readUTF().trim());
+            }
+            raf.close();
+        }catch (Exception e){
+            throw e;
+        }
+
+        if (onePet != null && onePet.getStatus().equals("DL")){
+            onePet = null;
+        }
+        return onePet;
+    }
+
+    public static Long getPointerPosByName(String pName){
+        File archivo;
+        RandomAccessFile raf;
+        archivo = new File(directorio, nombreArchivo);
+        try{
+            raf = new RandomAccessFile(archivo,"rw");
+            int iterator = 0;
+            while(raf.getFilePointer() < archivo.length()){
+                String name = raf.readUTF().trim();
+                pName = pName.trim();
+                if (pName.equals(name.trim())){
+                    return raf.getFilePointer() - NAME_SIZE - 2;
+                }
+                else{
+                    iterator++;
+                    raf.seek( iterator * getRegisterSize());
+                }
+            }
+            raf.close();
+        }catch(Exception e){
+            System.out.println("Error : " + e);
+        }
+        return null;
+
     }
 
 }
