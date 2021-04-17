@@ -228,7 +228,6 @@ public class ServicioPersistencia {
             System.out.println("Error : " + e);
         }
         return null;
-
     }
 
 }

@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.actividadesestructural"
+        applicationId "com.example.wikipets"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
