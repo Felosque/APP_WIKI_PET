@@ -80,6 +80,10 @@ public class ServicioPet {
         return servicioPersistencia.findAll();
     }
 
+    public ArrayList<Pet> getPetsByStatus() throws Exception {
+        return servicioPersistencia.findAllByState();
+    }
+
     public ArrayList<String> getPetsByNames() throws Exception {
         ArrayList<String> listaDeAnimales = new ArrayList<>();
         for (Pet i : getPets()){

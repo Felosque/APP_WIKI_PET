@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -28,6 +29,9 @@ public class GUIListar extends AppCompatActivity {
 
     private ListView listaPets;
 
+    private Button btnListar;
+    private int statusBtn = 0;
+
     private ServicioPet servicioPet;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -37,6 +41,9 @@ public class GUIListar extends AppCompatActivity {
         setContentView(R.layout.activity_g_u_i_listar);
 
         servicioPet = new ServicioPet(this);
+
+        btnListar = (Button) findViewById(R.id.btnListar);
+        btnListar.setText("Listar Eliminados");
 
         ArrayList<String> animales;
         listaPets = (ListView) findViewById(R.id.lstListaAnimales);
@@ -96,26 +103,30 @@ public class GUIListar extends AppCompatActivity {
     }
 
     public void btnListar_Click (View view){
-        /*try {
-            ArrayList<Pet> busqueda = ServicioPet.getPets();
-            if (!busqueda.isEmpty()){
-                String txtBusqueda = "";
-                for (int i = 0; i < busqueda.size(); i++){
-                    txtBusqueda += "MASCOTA N°-: " + busqueda.get(i).getId() + "\n" +
-                            "Nombre: " + busqueda.get(i).getName() + "\n"+
-                            "Fecha: " + ServicioFuncionalidades.dateToString(busqueda.get(i).getDiscoveredDate()) + "\n"+
-                            "Altura: " + busqueda.get(i).getHeight() + "\n"+
-                            "Tipo: " + busqueda.get(i).getAnimalType() + "\n"+
-                            "Descripción: " + busqueda.get(i).getDescription() + "\n\n";
-                }
-                lista.setText(txtBusqueda);
-            }else {
-                lista.setText("Ninguna Mascota");
-                Toast.makeText(this, "No se encontró ninguna mascota.", Toast.LENGTH_LONG ).show();
+        if (statusBtn == 0){
+            btnListar.setText("Listar Mascotas Activas");
+            statusBtn = 1;
+
+            AdaptadorPet adaptadorPet = null;
+            try {
+                adaptadorPet = new AdaptadorPet(this, R.layout.item_list, servicioPet.getPetsByStatus());
+            } catch (Exception e) {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG ).show();
             }
-        }catch (Exception e){
-            Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG ).show();
-        }*/
+            listaPets.setAdapter(adaptadorPet);
+        }
+        else{
+            btnListar.setText("Listar Mascotas Eliminadas");
+            statusBtn = 0;
+
+            AdaptadorPet adaptadorPet = null;
+            try {
+                adaptadorPet = new AdaptadorPet(this, R.layout.item_list, servicioPet.getPets());
+            } catch (Exception e) {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG ).show();
+            }
+            listaPets.setAdapter(adaptadorPet);
+        }
     }
 
     public void btnVolver_Click (View view) {
