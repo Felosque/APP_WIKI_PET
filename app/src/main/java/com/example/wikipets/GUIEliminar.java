@@ -42,6 +42,7 @@ public class GUIEliminar extends AppCompatActivity {
 
     private Spinner spnTipo;
 
+    private ServicioPet servicioPet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,8 @@ public class GUIEliminar extends AppCompatActivity {
 
         Intent intent = getIntent();
         String cad = intent.getStringExtra("ANIMAL");
+
+        servicioPet = new ServicioPet(this);
 
         layoutBusqueda = findViewById(R.id.layoutBusqueda);
         layoutResultado = findViewById(R.id.layoutResultado);
@@ -67,7 +70,7 @@ public class GUIEliminar extends AppCompatActivity {
     public void btnBuscar_Click(View view){
         try{
             String textBusqueda = txtBusqueda.getText().toString();
-            Pet busqueda = ServicioPet.searchPetsByName(textBusqueda);
+            Pet busqueda = servicioPet.searchPetsByName(textBusqueda);
 
             if (busqueda != null){
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -112,7 +115,15 @@ public class GUIEliminar extends AppCompatActivity {
 
     public void btnEliminar_Click(View view){
         String textBusqueda = txtBusqueda.getText().toString();
-        ServicioPet.deletePet(textBusqueda);
+        servicioPet.deletePet(textBusqueda);
+        Toast.makeText(this, "Se eliminó correctamente la mascota: " + textBusqueda, Toast.LENGTH_LONG ).show();
+        txtBusqueda.setText("");
+        visibleResultados(view,false);
+    }
+
+    public void btnEliminarLogico_Click(View view){
+        String textBusqueda = txtBusqueda.getText().toString();
+        servicioPet.deletePetLogic(textBusqueda);
         Toast.makeText(this, "Se eliminó correctamente la mascota: " + textBusqueda, Toast.LENGTH_LONG ).show();
         txtBusqueda.setText("");
         visibleResultados(view,false);

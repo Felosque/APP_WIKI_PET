@@ -28,6 +28,7 @@ public class GUIListar extends AppCompatActivity {
 
     private ListView listaPets;
 
+    private ServicioPet servicioPet;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -35,11 +36,13 @@ public class GUIListar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_g_u_i_listar);
 
+        servicioPet = new ServicioPet(this);
+
         ArrayList<String> animales;
         listaPets = (ListView) findViewById(R.id.lstListaAnimales);
         AdaptadorPet adaptadorPet = null;
         try {
-            adaptadorPet = new AdaptadorPet(this, R.layout.item_list, ServicioPet.getPets());
+            adaptadorPet = new AdaptadorPet(this, R.layout.item_list, servicioPet.getPets());
             listaPets.setAdapter(adaptadorPet);
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG ).show();
@@ -79,7 +82,7 @@ public class GUIListar extends AppCompatActivity {
 
         AdaptadorPet adaptadorPet = null;
         try {
-            adaptadorPet = new AdaptadorPet(this, R.layout.item_list, ServicioPet.getPets());
+            adaptadorPet = new AdaptadorPet(this, R.layout.item_list, servicioPet.getPets());
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG ).show();
         }

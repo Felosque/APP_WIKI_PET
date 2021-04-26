@@ -77,31 +77,47 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btnEliminarFisico"
+                            android:layout_width="165dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:backgroundTint="@color/red"
+                            android:onClick="btnEliminar_Click"
+                            android:text="Eliminar Logico" />
+
+                        <Button
+                            android:id="@+id/btnEliminarLogico"
+                            android:layout_width="165dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:backgroundTint="@color/red"
+                            android:onClick="btnEliminarLogico_Click"
+                            android:text="Eliminar Fisico" />
+
+                    </LinearLayout>
 
                     <Button
                         android:id="@+id/btnCancelarEliminar"
-                        android:layout_width="165dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:backgroundTint="@color/purple_700"
                         android:onClick="btnCancelar_Click"
                         android:text="@string/text_Cancelar" />
-
-                    <Button
-                        android:id="@+id/btnEliminar"
-                        android:layout_width="165dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:backgroundTint="@color/red"
-                        android:onClick="btnEliminar_Click"
-                        android:text="@string/txtEliminar" />
-
                 </LinearLayout>
-
 
             </LinearLayout>
 

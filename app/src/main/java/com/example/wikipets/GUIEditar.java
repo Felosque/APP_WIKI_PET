@@ -50,6 +50,8 @@ public class GUIEditar extends AppCompatActivity {
 
     private LinearLayout layoutResultado;
 
+    private ServicioPet servicioPet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +59,8 @@ public class GUIEditar extends AppCompatActivity {
 
         Intent intent = getIntent();
         String cad = intent.getStringExtra("ANIMAL");
+
+        servicioPet = new ServicioPet(this);
 
         nombre = (TextView) findViewById(R.id.txtNombre);
         descripcion = (TextView) findViewById(R.id.txtDescripcion);
@@ -112,7 +116,7 @@ public class GUIEditar extends AppCompatActivity {
             String textoTipo = spnTipo.getSelectedItem().toString();
 
             Pet nuevoPet = new Pet(idMascota, textoNombre, textoFecha, textoDes, textoAltura, textoTipo);
-            ServicioPet.updatePet(nuevoPet);
+            servicioPet.updatePet(nuevoPet);
             Toast.makeText(this, "Se actualizó correctamente la mascota ID: " + idMascota, Toast.LENGTH_LONG).show();
             visibleResultados(view,false);
         }catch (Exception e)
@@ -125,7 +129,7 @@ public class GUIEditar extends AppCompatActivity {
     public void btnBuscar_Click(View view){
         try {
             String textBusqueda = txtBusqueda.getText().toString();
-            Pet busqueda = ServicioPet.searchPetsByName(textBusqueda);
+            Pet busqueda = servicioPet.searchPetsByName(textBusqueda);
 
             if (busqueda != null) {
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

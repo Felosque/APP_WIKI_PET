@@ -50,30 +50,6 @@ public class MainActivity extends AppCompatActivity {
         }*/
 
 
-        try {
-            File archivo = new File(getApplicationContext().getFilesDir() + "/" + getString(R.string.nombreArchivo));
-            boolean estatus = archivo.exists();
-            if(estatus) {
-                Toast.makeText(getApplicationContext(), "Borrado", Toast.LENGTH_LONG);
-            }else {
-                try {
-                    // A partir del objeto File creamos el fichero físicamente
-                    if (archivo.createNewFile()) {
-                        System.out.println("El fichero se ha creado correctamente");
-                    }
-                    else {
-                        System.out.println("No ha podido ser creado el fichero");
-                    }
-                } catch (IOException ioe) {
-                    ioe.printStackTrace();
-                }
-            }
-        }catch (Exception e){
-            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG);
-        }
-
-        ServicioPersistencia.setDirectorio(getApplicationContext().getFilesDir());
-        ServicioPersistencia.setNombreArchivo(getString(R.string.nombreArchivo));
         Intent intent = new Intent(this, GUIMenu.class);
         startActivity(intent);
     }

@@ -1,5 +1,6 @@
 package com.example.wikipets.servicios;
 
+import android.database.Cursor;
 import android.widget.Spinner;
 
 import com.example.wikipets.R;
@@ -40,6 +41,20 @@ public class ServicioFuncionalidades {
             }
         }
         return 0;
+    }
+
+    public static Long persistDate(Date date) {
+        if (date != null) {
+            return date.getTime();
+        }
+        return null;
+    }
+
+    public static Date loadDate(Cursor cursor, int index) {
+        if (cursor.isNull(index)) {
+            return null;
+        }
+        return new Date(cursor.getLong(index));
     }
 
     public static int getImageTipoAnimal(String tipo){

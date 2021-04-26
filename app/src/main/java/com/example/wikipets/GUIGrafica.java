@@ -35,6 +35,8 @@ public class GUIGrafica extends AppCompatActivity {
 
     BarChart barChart;
 
+    private ServicioPet servicioPet;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -63,6 +65,8 @@ public class GUIGrafica extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_g_u_i_grafica);
 
+        servicioPet = new ServicioPet(this);
+
         pieChart = findViewById(R.id.charPie);
         //showPieChart();
 
@@ -82,7 +86,7 @@ public class GUIGrafica extends AppCompatActivity {
 
         //initializing data
         try{
-            Map<String, Integer> typeAmountMap = ServicioPet.getQuantityPetsOfType();
+            Map<String, Integer> typeAmountMap = servicioPet.getQuantityPetsOfType();
 
             //initializing colors for the entries
             ArrayList<Integer> colors = new ArrayList<>();
@@ -143,7 +147,7 @@ public class GUIGrafica extends AppCompatActivity {
         colors.add(Color.parseColor("#ff5f67"));
         colors.add(Color.parseColor("#3ca567"));
         try {
-            Map<String, Integer> typeAmountMap = ServicioPet.getQuantityPetsOfType();
+            Map<String, Integer> typeAmountMap = servicioPet.getQuantityPetsOfType();
             int i = 0;
             for (Map.Entry<String, Integer> entry : typeAmountMap.entrySet()) {
                 System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());

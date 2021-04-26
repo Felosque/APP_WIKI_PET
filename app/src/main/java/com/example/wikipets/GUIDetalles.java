@@ -79,7 +79,8 @@ public class GUIDetalles extends AppCompatActivity {
         try{
             Intent intent = getIntent();
             int cad = intent.getIntExtra("ANIMAL", -1);
-            animal = ServicioPet.searchPetsByIDArray(cad);
+            ServicioPet servicioPet = new ServicioPet(this);
+            animal = servicioPet.searchPetsByIDArray(cad);
 
 
             imgDetalle = (ImageView) findViewById(R.id.imgDetalle);

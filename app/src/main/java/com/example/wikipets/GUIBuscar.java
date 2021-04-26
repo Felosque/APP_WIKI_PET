@@ -55,8 +55,9 @@ public class GUIBuscar extends AppCompatActivity {
     public void btnBuscar_Click (View view) {
 
         try {
+            ServicioPet servicioPet = new ServicioPet(this);
             String textBusqueda = txtCodigo.getText().toString();
-            Pet busqueda = ServicioPet.searchPetsByName(textBusqueda);
+            Pet busqueda = servicioPet.searchPetsByName(textBusqueda);
 
             if (busqueda != null){
                 layoutFormulario.setVisibility(View.VISIBLE);

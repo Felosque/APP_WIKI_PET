@@ -1,5 +1,11 @@
 package com.example.wikipets.servicios;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
 import com.example.wikipets.estructural.Pet;
 
 import java.io.File;
@@ -8,226 +14,196 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ServicioPersistencia {
+public class ServicioPersistencia  extends SQLiteOpenHelper {
 
-    public static final int NAME_SIZE  = 20;
-    public static final int DISCOVERED_DATE_SIZE  = 10;
-    public static final int DESCRIPTION_SIZE  = 100;
-    public static final int HEIGHT_SIZE  = 10;
-    public static final int ANIMAL_TYPE_SIZE  = 20;
-    public static final int ICON_SIZE  = 10;
-    public static final int STATUS_SIZE  = 2;
+    public static final String DB_NAME = "WIKIPETS.db";
+    public static final String TABLE_PET = "PETS";
 
-    private static File directorio ;
-    private static String nombreArchivo = "";
 
-    public static File getDirectorio() {
-        return directorio;
+    public static final String AT_NAME = "NAME";
+    public static final String AT_DATE = "DISCOVER_DATE";
+    public static final String AT_DESCRIPTION = "DESCRIPTION";
+    public static final String AT_HEIGHT = "HEIGHT";
+    public static final String AT_ANIMAL_TYPE = "ANIMAL_TYPE";
+    public static final String AT_ICON = "ICON";
+    public static final String AT_STATUS = "STATUS";
+
+
+    public ServicioPersistencia(Context context){
+        super(context, DB_NAME,null,1);
     }
 
-    public static void setDirectorio(File pDirectorio) {
-        ServicioPersistencia.directorio = pDirectorio;
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        String cadSQL = "";
+
+        cadSQL = "CREATE TABLE " + TABLE_PET + " ("
+                + AT_NAME + " TEXT NOT NULL PRIMARY KEY, "
+                + AT_DATE + " INTEGER NOT NULL, "
+                + AT_DESCRIPTION + " TEXT NOT NULL, "
+                + AT_HEIGHT + " REAL NOT NULL, "
+                + AT_ANIMAL_TYPE + " TEXT NOT NULL, "
+                + AT_ICON + " INTEGER NOT NULL, "
+                + AT_STATUS + " TEXT NOT NULL "
+                + ")";
+
+        db.execSQL(cadSQL);
     }
 
-    public static String getNombreArchivo() {
-        return nombreArchivo;
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        String cadSQL = "";
+        cadSQL = "DROP TABLE IF EXISTS " + TABLE_PET;
+        db.execSQL(cadSQL);
     }
 
-    public static int getRegisterSize(){
-        return (NAME_SIZE + 2) + (DISCOVERED_DATE_SIZE + 2) + (DESCRIPTION_SIZE + 2) + (HEIGHT_SIZE + 2)
-                + (ANIMAL_TYPE_SIZE + 2)  + (ICON_SIZE + 2) + (STATUS_SIZE + 2);
-    }
 
-    public static void setNombreArchivo(String nombreArchivo) {
-        ServicioPersistencia.nombreArchivo = nombreArchivo;
-    }
+    public boolean add(Pet pet) throws Exception {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues;
+        long result;
 
-    private static String setStringSize(String cad, int tam){
-        int dif = 0;
-        if(cad.length() > tam){
-            cad = cad.substring(0, tam);
-            return cad;
+        contentValues = new ContentValues();
+        contentValues.put(AT_NAME, pet.getName() );
+        contentValues.put(AT_DATE, ServicioFuncionalidades.persistDate(pet.getDiscoveredDate()) );
+        contentValues.put(AT_DESCRIPTION, pet.getDescription() );
+        contentValues.put(AT_HEIGHT, pet.getHeight() );
+        contentValues.put(AT_ANIMAL_TYPE, pet.getAnimalType() );
+        contentValues.put(AT_ICON, pet.getIcon() );
+        contentValues.put(AT_STATUS, "AC");
+
+        result = db.insertOrThrow(TABLE_PET, null, contentValues);
+        if(result == -1){
+            return false;
         }
-        dif = tam - cad.length();
-        cad = cad + new String(new char[dif]).replace('\0', ' ');
-        return cad;
+        return true;
     }
 
-
-    public static void add(Pet pet) throws Exception {
-        File archivo;
-        RandomAccessFile raf;
-
-        archivo = new File(directorio, nombreArchivo);
-
-        try{
-            raf = new RandomAccessFile(archivo,"rw");
-            raf.seek(archivo.length());
-
-            //Escritura
-            raf.writeUTF( setStringSize(pet.getName(), NAME_SIZE) );
-            raf.writeUTF( setStringSize(ServicioFuncionalidades.dateToString(pet.getDiscoveredDate()), DISCOVERED_DATE_SIZE) );
-            raf.writeUTF( setStringSize(pet.getDescription(), DESCRIPTION_SIZE) );
-            raf.writeUTF( setStringSize( "" + pet.getHeight(), HEIGHT_SIZE) );
-            raf.writeUTF( setStringSize(pet.getAnimalType(), ANIMAL_TYPE_SIZE) );
-            raf.writeUTF( setStringSize( "" + pet.getIcon(), ICON_SIZE) );
-            pet.setStatus("AC");
-            raf.writeUTF( setStringSize( pet.getStatus(), STATUS_SIZE) );
-            raf.close();
-
-        }catch(Exception e){
-            throw e;
-        }
-    }
-
-    public static ArrayList<Pet> findAll() throws Exception {
+    public ArrayList<Pet> findAll() throws Exception {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String cadSQL = "SELECT * FROM " + TABLE_PET + " WHERE " + AT_STATUS + " = 'AC' ";
+        Cursor res = db.rawQuery(cadSQL, null);;
         ArrayList<Pet> pets = new ArrayList<>();
 
-        File archivo;
-        RandomAccessFile raf;
-        archivo = new File(directorio, nombreArchivo);
+        if(res.getCount() <= 0){
+           throw new Exception("No existen animales en la base de datos.");
+        }
 
-        try{
-            raf = new RandomAccessFile(archivo,"r");
-            while(raf.getFilePointer() < archivo.length())
-            {
-                Pet onePet = new Pet();
-                onePet.setName(raf.readUTF().trim());
-                onePet.setDiscoveredDate(ServicioFuncionalidades.ParseFecha(raf.readUTF().trim()));
-                onePet.setDescription(raf.readUTF().trim());
-                onePet.setHeight(Double.parseDouble(raf.readUTF().trim()));
-                onePet.setAnimalType("" + raf.readUTF().trim());
-                onePet.setIcon(Integer.parseInt(raf.readUTF().trim()));
-                onePet.setStatus(raf.readUTF().trim());
-                if(onePet.getStatus().equals("AC")) {
-                    pets.add(onePet);
-                }
-            }
+        while(res.moveToNext()){
 
-            raf.close();
-        }catch(Exception e){
+            Pet newPet = new Pet();
+            newPet.setName(res.getString(0));
+            newPet.setDiscoveredDate(ServicioFuncionalidades.loadDate(res, 1));
+            newPet.setDescription(res.getString(2));
+            newPet.setHeight(res.getDouble(3));
+            newPet.setAnimalType(res.getString(4));
+            newPet.setIcon(res.getInt(5));
+            newPet.setStatus(res.getString(6));
 
-            throw e;
+            pets.add(newPet);
         }
         return pets;
     }
 
-    public static boolean delete(String pName){
-        /*boolean delete = false;
-        File archivo;
-        RandomAccessFile raf;
-        archivo = new File(directorio, nombreArchivo);*/
+    public ArrayList<Pet> findAllByState() throws Exception {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String cadSQL = "SELECT * FROM " + TABLE_PET + " WHERE " + AT_STATUS + " = 'DL' ";
+        Cursor res = db.rawQuery(cadSQL, null);
 
-        try {
-            /*raf = new RandomAccessFile(archivo, "rw");
-            Long pos = getPointerPosByName(pName);
-            if(pos != null) {
-                pos += (getRegisterSize() - (STATUS_SIZE + 2));
-                raf.seek(pos);
-                raf.writeUTF(setStringSize("DL", STATUS_SIZE));
-                delete = true;
-            }
-            raf.close();*/
+        ArrayList<Pet> pets = new ArrayList<>();
 
-            Pet petDelete = new Pet();
-            petDelete.setName("NONE");
-            petDelete.setDiscoveredDate(new Date());
-            petDelete.setDescription("NONE");
-            petDelete.setHeight(-1);
-            petDelete.setAnimalType("NONE");
-            petDelete.setIcon(-1);
-            petDelete.setStatus("DL");
-            return update(pName, petDelete);
-
-        }catch (Exception e){
-            System.out.println(e.getMessage());
+        if(res.getCount() == 0){
+            throw new Exception("No existen animales en la base de datos.");
         }
-        return false;
+
+        while(res.moveToNext()){
+
+            Pet newPet = new Pet();
+
+            newPet.setName(res.getString(0));
+            newPet.setDiscoveredDate(ServicioFuncionalidades.loadDate(res, 1));
+            newPet.setDescription(res.getString(2));
+            newPet.setHeight(res.getDouble(3));
+            newPet.setAnimalType(res.getString(4));
+            newPet.setIcon(res.getInt(5));
+            newPet.setStatus(res.getString(6));
+
+            pets.add(newPet);
+        }
+        return pets;
     }
 
-    public static boolean update(String name, Pet pet){
-        boolean update = false;
-        File archivo;
-        RandomAccessFile raf;
-        archivo = new File(directorio, nombreArchivo);
+    public boolean deleteByStatus(String pName){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues;
 
-        try {
-            raf = new RandomAccessFile(archivo, "rw");
-            Long pos = getPointerPosByName(name);
-            if(pos != null) {
-                raf.seek(pos);
-                raf.writeUTF( setStringSize(pet.getName(), NAME_SIZE) );
-                raf.writeUTF( setStringSize(ServicioFuncionalidades.dateToString(pet.getDiscoveredDate()), DISCOVERED_DATE_SIZE) );
-                raf.writeUTF( setStringSize(pet.getDescription(), DESCRIPTION_SIZE) );
-                raf.writeUTF( setStringSize( "" + pet.getHeight(), HEIGHT_SIZE) );
-                raf.writeUTF( setStringSize(pet.getAnimalType(), ANIMAL_TYPE_SIZE) );
-                pet.setIcon(ServicioFuncionalidades.getImageTipoAnimal(pet.getAnimalType()));
-                raf.writeUTF( setStringSize( "" + pet.getIcon(), ICON_SIZE) );
-                raf.writeUTF( setStringSize( pet.getStatus(), STATUS_SIZE) );
-                update = true;
-            }
-            raf.close();
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-        return update;
+        contentValues = new ContentValues();
+        contentValues.put(AT_STATUS, "DL");
+
+        String condition = AT_NAME + " = '" + pName + "'";
+        int columnsAfected = db.update(TABLE_PET, contentValues, condition, null);
+
+        if (columnsAfected == 1){ return true; }
+        else{ return false; }
     }
 
-    public static Pet findByName(String pName) throws IOException {
+    public boolean delete(String pName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues;
 
-        File archivo;
-        RandomAccessFile raf;
-        archivo = new File(directorio, nombreArchivo);
-        Pet onePet = null;
+        String condition = AT_NAME + "=?";
+        String[] args = new String[]{pName};
+        int columnsAfected = db.delete(TABLE_PET, condition, args);
 
-        try {
-            raf = new RandomAccessFile(archivo, "rw");
-            Long pos = getPointerPosByName(pName);
-            if(pos != null) {
-                raf.seek(getPointerPosByName(pName));
-                onePet = new Pet();
-                onePet.setName(raf.readUTF().trim());
-                onePet.setDiscoveredDate(ServicioFuncionalidades.ParseFecha(raf.readUTF().trim()));
-                onePet.setDescription(raf.readUTF().trim());
-                onePet.setHeight(Double.parseDouble(raf.readUTF().trim()));
-                onePet.setAnimalType("" + raf.readUTF().trim());
-                onePet.setIcon(Integer.parseInt(raf.readUTF().trim()));
-                onePet.setStatus(raf.readUTF().trim());
-            }
-            raf.close();
-        }catch (Exception e){
-            throw e;
-        }
-
-        if (onePet != null && onePet.getStatus().equals("DL")){
-            onePet = null;
-        }
-        return onePet;
+        if (columnsAfected == 1){ return true; }
+        else{ return false; }
     }
 
-    public static Long getPointerPosByName(String pName){
-        File archivo;
-        RandomAccessFile raf;
-        archivo = new File(directorio, nombreArchivo);
-        try{
-            raf = new RandomAccessFile(archivo,"rw");
-            int iterator = 0;
-            while(raf.getFilePointer() < archivo.length()){
-                String name = raf.readUTF().trim();
-                pName = pName.trim();
-                if (pName.equals(name.trim())){
-                    return raf.getFilePointer() - NAME_SIZE - 2;
-                }
-                else{
-                    iterator++;
-                    raf.seek( iterator * getRegisterSize());
-                }
-            }
-            raf.close();
-        }catch(Exception e){
-            System.out.println("Error : " + e);
+    public boolean update(String name, Pet pet){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues;
+
+        contentValues = new ContentValues();
+        contentValues.put(AT_DATE, ServicioFuncionalidades.persistDate(pet.getDiscoveredDate()) );
+        contentValues.put(AT_DESCRIPTION, pet.getDescription() );
+        contentValues.put(AT_HEIGHT, pet.getHeight() );
+        contentValues.put(AT_ANIMAL_TYPE, pet.getAnimalType() );
+        contentValues.put(AT_ICON, ServicioFuncionalidades.getImageTipoAnimal(pet.getAnimalType()));
+        contentValues.put(AT_STATUS, "AC");
+
+        String condition = AT_NAME + " = '" + name + "'";
+        int columnsAfected = db.update(TABLE_PET, contentValues, condition, null);
+
+        if (columnsAfected == 1){
+            return true;
+        }else{
+            return false;
         }
-        return null;
+    }
+
+    public Pet findByName(String pName) throws Exception {
+        Pet pet = null;
+        SQLiteDatabase db = this.getWritableDatabase();
+        String cadSQL = "SELECT * FROM " + TABLE_PET + " WHERE " + AT_NAME + " = '" + pName + "';";
+        Cursor res = db.rawQuery(cadSQL, null);
+
+        if(res.getCount() == 0){
+            throw new Exception("No se encontró el animal en la base de datos.");
+        }
+
+        while(res.moveToNext()){
+
+            pet = new Pet();
+            pet.setName(res.getString(0));
+            pet.setDiscoveredDate(ServicioFuncionalidades.loadDate(res, 1));
+            pet.setDescription(res.getString(2));
+            pet.setHeight(res.getDouble(3));
+            pet.setAnimalType(res.getString(4));
+            pet.setIcon(res.getInt(5));
+            pet.setStatus(res.getString(6));
+        }
+        return pet;
     }
 
 }

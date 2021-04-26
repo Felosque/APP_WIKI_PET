@@ -1,5 +1,7 @@
 package com.example.wikipets.servicios;
 
+import android.content.Context;
+
 import com.example.wikipets.estructural.Pet;
 import com.example.wikipets.estructural.TipoAnimal;
 
@@ -14,49 +16,56 @@ public class ServicioPet {
 
     private static int numRegistros = 0;
 
-    public ServicioPet() {
+    private ServicioPersistencia servicioPersistencia;
 
+    public ServicioPet(Context context) {
+        servicioPersistencia = new ServicioPersistencia(context);
     }
 
-    public static void addPets(Pet pet) throws Exception {
-
-        Pet buscado = searchPetsByName(pet.getName());
-        if (buscado != null) {
-            throw new Exception("Ya existe un animal con ese nombre");
-        }else {
-            numRegistros++;
-            pet.setId(numRegistros);
-            //pets.add(pet);
-            ServicioPersistencia.add(pet);
+    public void addPets(Pet pet) throws Exception {
+        try{
+            servicioPersistencia.add(pet);
+        }catch (Exception e){
+            throw e;
         }
     }
 
-    public static boolean deletePet(String name){
-        return ServicioPersistencia.delete(name);
+    public boolean deletePet(String name){
+        return servicioPersistencia.delete(name);
     }
 
-    public static Pet searchPetsByName(String name) throws Exception {
-        return ServicioPersistencia.findByName(name);
+    public boolean deletePetLogic(String name){
+        return servicioPersistencia.deleteByStatus(name);
     }
 
-    public static Pet searchPetsByIDArray(int pId) throws Exception {
+    public Pet searchPetsByName(String name) throws Exception {
+        Pet pet = null;
+        try{
+            pet = servicioPersistencia.findByName(name);
+        }catch (Exception e) {
+            throw e;
+        }
+        return pet;
+    }
+
+    public Pet searchPetsByIDArray(int pId) throws Exception {
         try {
-            return ServicioPersistencia.findAll().get(pId);
+            return servicioPersistencia.findAll().get(pId);
         }catch (Exception e){
             throw new Exception("Error al cargar la mascota.");
         }
     }
 
-    public static int getQuantityPet(String pType) throws Exception {
+    public int getQuantityPet(String pType) throws Exception {
         int count = 0;
-        for (Pet pet : ServicioPersistencia.findAll()){
+        for (Pet pet : servicioPersistencia.findAll()){
             if (pet.getAnimalType().equals(pType))
                 count++;
         }
         return count;
     }
 
-    public static Map<String, Integer> getQuantityPetsOfType() throws Exception {
+    public Map<String, Integer> getQuantityPetsOfType() throws Exception {
         Map<String, Integer> typeAmountMap = new HashMap<>();
         for (String type : TipoAnimal.getTypeAnimal()){
             int quantity = getQuantityPet(type);
@@ -67,11 +76,11 @@ public class ServicioPet {
         return  typeAmountMap;
     }
 
-    public static ArrayList<Pet> getPets() throws Exception {
-        return ServicioPersistencia.findAll();
+    public ArrayList<Pet> getPets() throws Exception {
+        return servicioPersistencia.findAll();
     }
 
-    public static ArrayList<String> getPetsByNames() throws Exception {
+    public ArrayList<String> getPetsByNames() throws Exception {
         ArrayList<String> listaDeAnimales = new ArrayList<>();
         for (Pet i : getPets()){
             listaDeAnimales.add(i.getName());
@@ -79,10 +88,9 @@ public class ServicioPet {
         return listaDeAnimales;
     }
 
-    public static boolean updatePet(Pet petsUpdate) throws Exception {
-
+    public boolean updatePet(Pet petsUpdate) throws Exception {
         try{
-            return ServicioPersistencia.update(petsUpdate.getName(), petsUpdate);
+            return servicioPersistencia.update(petsUpdate.getName(), petsUpdate);
         }catch (Exception e){
             throw new Exception("Error al actualizar al animal. No se ha encontrado.");
         }

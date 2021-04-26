@@ -35,11 +35,14 @@ public class GUIAdicionar extends AppCompatActivity {
 
     private Spinner spnTipo;
 
+    private ServicioPet servicioPet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_g_u_i_adicionar);
 
+        servicioPet = new ServicioPet(this);
         c = Calendar.getInstance();
         nombre = (TextView) findViewById(R.id.txtNombre);
         descripcion = (TextView) findViewById(R.id.txtDescripcion);
@@ -81,7 +84,8 @@ public class GUIAdicionar extends AppCompatActivity {
             int imagenTipo = ServicioFuncionalidades.getImageTipoAnimal(textoTipo);
 
             Pet nuevoPet = new Pet(textoNombre, textoFecha, textoDes, textoAltura, textoTipo, imagenTipo);
-            ServicioPet.addPets(nuevoPet);
+            nuevoPet.setStatus("AC");
+            servicioPet.addPets(nuevoPet);
             Toast.makeText(this, "Se registró correctamente la mascota", Toast.LENGTH_LONG).show();
 
             nombre.setText("");
