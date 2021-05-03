@@ -110,7 +110,7 @@ public class GUIDetalles extends AppCompatActivity {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spnTipo.setAdapter(adapter);
             spnTipo.setEnabled(false);
-            spnTipo.setSelection(TipoAnimal.getIndexSpinnerValue(spnTipo, animal.getAnimalType()));
+            spnTipo.setSelection(TipoAnimal.getIndexSpinnerValue(spnTipo, String.valueOf(animal.getAnimalType())));
             //ArrayAdapter adaptador = new ArrayAdapter(this, android.R.layout.simple_spinner_item, ServicioFuncionalidades.tiposAnimal);
             //adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             //spnTipo.setAdapter(adaptador);

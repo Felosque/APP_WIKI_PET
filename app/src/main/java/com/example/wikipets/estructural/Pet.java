@@ -11,11 +11,11 @@ public class Pet {
     private Date discoveredDate;
     private String description;
     private double height;
-    private String animalType;
+    private int animalType;
     private int icon;
     private String status;
 
-    public Pet(int id, String name, Date discoveredDate, String description, double height, String animalType) {
+    public Pet(int id, String name, Date discoveredDate, String description, double height, int animalType) {
         this.name = name;
         this.discoveredDate = discoveredDate;
         this.description = description;
@@ -25,7 +25,7 @@ public class Pet {
         this.icon = R.drawable.fault;
     }
 
-    public Pet(String name, Date discoveredDate, String description, double height, String animalType, int pIcon) {
+    public Pet(String name, Date discoveredDate, String description, double height, int animalType, int pIcon) {
         this.name = name;
         this.discoveredDate = discoveredDate;
         this.description = description;
@@ -35,7 +35,7 @@ public class Pet {
         this.icon = pIcon;
     }
 
-    public Pet(String name, Date discoveredDate, String description, double height, String animalType) {
+    public Pet(String name, Date discoveredDate, String description, double height, int animalType) {
         this.name = name;
         this.discoveredDate = discoveredDate;
         this.description = description;
@@ -95,11 +95,11 @@ public class Pet {
         this.height = height;
     }
 
-    public String getAnimalType() {
+    public int getAnimalType() {
         return animalType;
     }
 
-    public void setAnimalType(String animalType) {
+    public void setAnimalType(int animalType) {
         this.animalType = animalType;
     }
 

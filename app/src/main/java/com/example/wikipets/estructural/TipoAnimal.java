@@ -6,6 +6,30 @@ import java.util.ArrayList;
 
 public class TipoAnimal {
 
+    private int codigo;
+    private String nombre;
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
+    
     private static ArrayList<String> typeAnimal = new ArrayList<String>();
 
     private static void addTypeAnimals(String type){typeAnimal.add(type);}

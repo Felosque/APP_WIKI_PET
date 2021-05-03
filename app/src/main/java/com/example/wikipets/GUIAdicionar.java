@@ -14,8 +14,10 @@ import android.widget.Toast;
 import com.example.wikipets.estructural.Pet;
 import com.example.wikipets.estructural.TipoAnimal;
 import com.example.wikipets.servicios.ServicioFuncionalidades;
+import com.example.wikipets.servicios.ServicioPersistencia;
 import com.example.wikipets.servicios.ServicioPet;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -57,9 +59,9 @@ public class GUIAdicionar extends AppCompatActivity {
     }
 
     public void loadAnimals(){
-        ArrayList<String> typeAnimals;
-        TipoAnimal.loadAnimals();
-        typeAnimals = TipoAnimal.getTypeAnimal();
+        ServicioPersistencia servicioPersistencia = new ServicioPersistencia(this);
+        ArrayList<TipoAnimal> typeAnimals;
+        typeAnimals = servicioPersistencia.findAllType();
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,typeAnimals);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -80,8 +82,12 @@ public class GUIAdicionar extends AppCompatActivity {
             String textoNombre = nombre.getText().toString();
             String textoDes = descripcion.getText().toString();
             Double textoAltura = Double.parseDouble(altura.getText().toString());
-            String textoTipo = spnTipo.getSelectedItem().toString();
-            int imagenTipo = ServicioFuncionalidades.getImageTipoAnimal(textoTipo);
+            Object tipoAnimal = spnTipo.getSelectedItem();
+            Method getAnimalTypeId = TipoAnimal.class.getMethod("getCodigo");
+            Object result = getAnimalTypeId.invoke(tipoAnimal);
+            int textoTipo = Integer.parseInt(result.toString());
+            //Toast.makeText(this,"hello: " + textoTipo, Toast.LENGTH_LONG).show();
+            int imagenTipo = ServicioFuncionalidades.getImageTipoAnimal(tipoAnimal.toString());
 
             Pet nuevoPet = new Pet(textoNombre, textoFecha, textoDes, textoAltura, textoTipo, imagenTipo);
             nuevoPet.setStatus("AC");

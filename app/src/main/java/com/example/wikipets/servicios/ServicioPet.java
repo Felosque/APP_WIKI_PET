@@ -56,10 +56,10 @@ public class ServicioPet {
         }
     }
 
-    public int getQuantityPet(String pType) throws Exception {
+    public int getQuantityPet(int pType) throws Exception {
         int count = 0;
         for (Pet pet : servicioPersistencia.findAll()){
-            if (pet.getAnimalType().equals(pType))
+            if (pet.getAnimalType() == pType)
                 count++;
         }
         return count;
@@ -67,10 +67,11 @@ public class ServicioPet {
 
     public Map<String, Integer> getQuantityPetsOfType() throws Exception {
         Map<String, Integer> typeAmountMap = new HashMap<>();
-        for (String type : TipoAnimal.getTypeAnimal()){
-            int quantity = getQuantityPet(type);
+        ArrayList<TipoAnimal> petsType = servicioPersistencia.findAllType();
+        for (TipoAnimal type : petsType){
+            int quantity = getQuantityPet(type.getCodigo());
             if(quantity > 0) {
-                typeAmountMap.put(type, quantity);
+                typeAmountMap.put(type.getNombre(), quantity);
             }
         }
         return  typeAmountMap;

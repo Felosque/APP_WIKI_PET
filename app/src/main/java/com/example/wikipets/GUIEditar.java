@@ -20,6 +20,7 @@ import com.example.wikipets.estructural.TipoAnimal;
 import com.example.wikipets.servicios.ServicioFuncionalidades;
 import com.example.wikipets.servicios.ServicioPet;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -113,7 +114,10 @@ public class GUIEditar extends AppCompatActivity {
             String textoNombre = nombre.getText().toString();
             String textoDes = descripcion.getText().toString();
             Double textoAltura = Double.parseDouble(altura.getText().toString());
-            String textoTipo = spnTipo.getSelectedItem().toString();
+            Object tipoAnimal = spnTipo.getSelectedItem();
+            Method getAnimalTypeId = TipoAnimal.class.getMethod("getCodigo");
+            Object result = getAnimalTypeId.invoke(tipoAnimal);
+            int textoTipo = Integer.parseInt(result.toString());
 
             Pet nuevoPet = new Pet(idMascota, textoNombre, textoFecha, textoDes, textoAltura, textoTipo);
             servicioPet.updatePet(nuevoPet);
@@ -141,7 +145,7 @@ public class GUIEditar extends AppCompatActivity {
                 this.altura.setText("" + busqueda.getHeight());
                 this.descripcion.setText(busqueda.getDescription());
                 this.fechaDescubrimiento.setText(ServicioFuncionalidades.dateToString(busqueda.getDiscoveredDate()));
-                this.spnTipo.setSelection(ServicioFuncionalidades.getIndexSpinnerValue(spnTipo, busqueda.getAnimalType()));
+                this.spnTipo.setSelection(ServicioFuncionalidades.getIndexSpinnerValue(spnTipo, String.valueOf(busqueda.getAnimalType())));
                 visibleResultados(view, true);
             } else {
                 Toast.makeText(this, "No se encontró ninguna mascota.", Toast.LENGTH_LONG).show();
