@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.example.wikipets.estructural.Pet;
 import com.example.wikipets.estructural.TipoAnimal;
+import com.example.wikipets.interfaces.CRUDPet;
 import com.example.wikipets.servicios.ServicioFuncionalidades;
-import com.example.wikipets.servicios.ServicioPersistencia;
 import com.example.wikipets.servicios.ServicioPet;
 
 import java.lang.reflect.Method;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class GUIAdicionar extends AppCompatActivity {
+public class GUIAdicionar extends AppCompatActivity implements CRUDPet {
 
     private TextView nombre;
 
@@ -37,14 +37,14 @@ public class GUIAdicionar extends AppCompatActivity {
 
     private Spinner spnTipo;
 
-    private ServicioPet servicioPet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_g_u_i_adicionar);
 
-        servicioPet = new ServicioPet(this);
+        ServicioPet.setCrudPet(this);
+
         c = Calendar.getInstance();
         nombre = (TextView) findViewById(R.id.txtNombre);
         descripcion = (TextView) findViewById(R.id.txtDescripcion);
@@ -59,11 +59,10 @@ public class GUIAdicionar extends AppCompatActivity {
     }
 
     public void loadAnimals(){
-        ServicioPersistencia servicioPersistencia = new ServicioPersistencia(this);
-        ArrayList<TipoAnimal> typeAnimals;
-        typeAnimals = servicioPersistencia.findAllType();
+        ArrayList<String> typeAnimals;
+        typeAnimals = TipoAnimal.getTypeAnimal();
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,typeAnimals);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, typeAnimals);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnTipo.setAdapter(adapter);
     }
@@ -82,17 +81,12 @@ public class GUIAdicionar extends AppCompatActivity {
             String textoNombre = nombre.getText().toString();
             String textoDes = descripcion.getText().toString();
             Double textoAltura = Double.parseDouble(altura.getText().toString());
-            Object tipoAnimal = spnTipo.getSelectedItem();
-            Method getAnimalTypeId = TipoAnimal.class.getMethod("getCodigo");
-            Object result = getAnimalTypeId.invoke(tipoAnimal);
-            int textoTipo = Integer.parseInt(result.toString());
-            //Toast.makeText(this,"hello: " + textoTipo, Toast.LENGTH_LONG).show();
-            int imagenTipo = ServicioFuncionalidades.getImageTipoAnimal(tipoAnimal.toString());
+            String textoTipo = spnTipo.getSelectedItem().toString();
+            int imagenTipo = ServicioFuncionalidades.getImageTipoAnimal(textoTipo);
 
             Pet nuevoPet = new Pet(textoNombre, textoFecha, textoDes, textoAltura, textoTipo, imagenTipo);
             nuevoPet.setStatus("AC");
-            servicioPet.addPets(nuevoPet);
-            Toast.makeText(this, "Se registró correctamente la mascota", Toast.LENGTH_LONG).show();
+            ServicioPet.addPets(nuevoPet);
 
             nombre.setText("");
             descripcion.setText("");
@@ -122,5 +116,20 @@ public class GUIAdicionar extends AppCompatActivity {
 
     public void btnVolver_Click (View view) {
         finish();
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showPets(ArrayList<Pet> pets) {
+
+    }
+
+    @Override
+    public void showOnePet(Pet pet) {
+
     }
 }

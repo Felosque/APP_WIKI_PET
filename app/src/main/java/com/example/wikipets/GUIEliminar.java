@@ -70,7 +70,7 @@ public class GUIEliminar extends AppCompatActivity {
     public void btnBuscar_Click(View view){
         try{
             String textBusqueda = txtBusqueda.getText().toString();
-            Pet busqueda = servicioPet.searchPetsByName(textBusqueda);
+            Pet busqueda = null; //servicioPet.searchPetsByName(textBusqueda);
 
             if (busqueda != null){
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -95,7 +95,6 @@ public class GUIEliminar extends AppCompatActivity {
 
                 spnTipo = (Spinner) findViewById(R.id.spTipo);
                 ArrayList<String> typeAnimals;
-                TipoAnimal.loadAnimals();
                 typeAnimals = TipoAnimal.getTypeAnimal();
                 ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,typeAnimals);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

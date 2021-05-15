@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "192540529283",
+    "project_id": "appwikipet",
+    "storage_bucket": "appwikipet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:192540529283:android:f343a8322326d3fbe881b6",
+        "android_client_info": {
+          "package_name": "com.example.wikipets"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "192540529283-vnq8bk4m1vt2n4nmgblthn2kapfe4iqk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3NJCslSAbtdEfFiByUy-2_NjAviZiqD0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "192540529283-vnq8bk4m1vt2n4nmgblthn2kapfe4iqk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

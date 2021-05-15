@@ -86,7 +86,7 @@ public class GUIGrafica extends AppCompatActivity {
 
         //initializing data
         try{
-            Map<String, Integer> typeAmountMap = servicioPet.getQuantityPetsOfType();
+            Map<String, Integer> typeAmountMap = null; //servicioPet.getQuantityPetsOfType();
 
             //initializing colors for the entries
             ArrayList<Integer> colors = new ArrayList<>();
@@ -147,7 +147,7 @@ public class GUIGrafica extends AppCompatActivity {
         colors.add(Color.parseColor("#ff5f67"));
         colors.add(Color.parseColor("#3ca567"));
         try {
-            Map<String, Integer> typeAmountMap = servicioPet.getQuantityPetsOfType();
+            Map<String, Integer> typeAmountMap = null;// servicioPet.getQuantityPetsOfType();
             int i = 0;
             for (Map.Entry<String, Integer> entry : typeAmountMap.entrySet()) {
                 System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());

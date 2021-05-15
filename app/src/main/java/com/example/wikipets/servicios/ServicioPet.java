@@ -2,8 +2,19 @@ package com.example.wikipets.servicios;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import com.example.wikipets.estructural.Pet;
 import com.example.wikipets.estructural.TipoAnimal;
+import com.example.wikipets.interfaces.CRUDPet;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -12,92 +23,134 @@ import java.util.Map;
 
 public class ServicioPet {
 
-    //private static final ArrayList <Pet> pets = new ArrayList<Pet>();
-
-    private static int numRegistros = 0;
-
-    private ServicioPersistencia servicioPersistencia;
+    private static FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private static CRUDPet crudPet;
 
     public ServicioPet(Context context) {
-        servicioPersistencia = new ServicioPersistencia(context);
     }
 
-    public void addPets(Pet pet) throws Exception {
-        try{
-            servicioPersistencia.add(pet);
-        }catch (Exception e){
-            throw e;
-        }
+    public static void setCrudPet(CRUDPet crudPet) {
+        ServicioPet.crudPet = crudPet;
     }
 
-    public boolean deletePet(String name){
-        return servicioPersistencia.delete(name);
+    public static void addPets(Pet pet) {
+        db.collection("pets")
+                .document(String.valueOf(pet.getName()))
+                .set(pet)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            crudPet.showMessage("Animal añadido satisfactoriamente.");
+                        }else{
+                            crudPet.showMessage("No se ha podido añadir al animal.");}
+                    }
+                });
     }
 
-    public boolean deletePetLogic(String name){
-        return servicioPersistencia.deleteByStatus(name);
+    public static void deletePet(String name){
+        db.collection("pets")
+                .document(String.valueOf(name))
+                .delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            crudPet.showMessage("Animal se borró el animal de la base de datos.");
+                        }else{
+                            crudPet.showMessage("No se ha podido borrar al animal de la base de datos.");}
+                    }
+                });
     }
 
-    public Pet searchPetsByName(String name) throws Exception {
-        Pet pet = null;
-        try{
-            pet = servicioPersistencia.findByName(name);
-        }catch (Exception e) {
-            throw e;
-        }
-        return pet;
+    public void deletePetLogic(String name){
+        db.collection("pets")
+                .document(String.valueOf(name))
+                .update("status", "DL")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            crudPet.showMessage("Animal se borró logicamente.");
+                        }else{
+                            crudPet.showMessage("No se ha podido borrar al animal.");}
+                    }
+                });
     }
 
-    public Pet searchPetsByIDArray(int pId) throws Exception {
-        try {
-            return servicioPersistencia.findAll().get(pId);
-        }catch (Exception e){
-            throw new Exception("Error al cargar la mascota.");
-        }
-    }
-
-    public int getQuantityPet(int pType) throws Exception {
-        int count = 0;
-        for (Pet pet : servicioPersistencia.findAll()){
-            if (pet.getAnimalType() == pType)
-                count++;
-        }
-        return count;
-    }
-
-    public Map<String, Integer> getQuantityPetsOfType() throws Exception {
-        Map<String, Integer> typeAmountMap = new HashMap<>();
-        ArrayList<TipoAnimal> petsType = servicioPersistencia.findAllType();
-        for (TipoAnimal type : petsType){
-            int quantity = getQuantityPet(type.getCodigo());
-            if(quantity > 0) {
-                typeAmountMap.put(type.getNombre(), quantity);
+    public static void searchPetsByName(String name) {
+        DocumentReference docRef = db.collection("pets").document(name);
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Pet pet = documentSnapshot.toObject(Pet.class);
+                crudPet.showOnePet(pet);
             }
-        }
-        return  typeAmountMap;
+        });
     }
 
-    public ArrayList<Pet> getPets() throws Exception {
-        return servicioPersistencia.findAll();
+    public static void getQuantityPet(int pType) {
+
     }
 
-    public ArrayList<Pet> getPetsByStatus() throws Exception {
-        return servicioPersistencia.findAllByState();
+    public static void getQuantityPetsOfType() {
+
     }
 
-    public ArrayList<String> getPetsByNames() throws Exception {
-        ArrayList<String> listaDeAnimales = new ArrayList<>();
-        for (Pet i : getPets()){
-            listaDeAnimales.add(i.getName());
-        }
-        return listaDeAnimales;
+    public static void getPets() {
+        db.collection("pets")
+                .whereEqualTo("status", "AC")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            ArrayList <Pet> pets = new ArrayList<>();
+                            for(QueryDocumentSnapshot document :  task.getResult()){
+                                Pet pet = document.toObject(Pet.class);
+                                pets.add(pet);
+                            }
+                            crudPet.showPets(pets);
+                        }else{
+                            crudPet.showMessage("¡Ups! Al parecer la lista está vacia");
+                        }
+                    }
+                });
     }
 
-    public boolean updatePet(Pet petsUpdate) throws Exception {
-        try{
-            return servicioPersistencia.update(petsUpdate.getName(), petsUpdate);
-        }catch (Exception e){
-            throw new Exception("Error al actualizar al animal. No se ha encontrado.");
-        }
+    public static void getPetsByStatus() {
+        db.collection("pets")
+                .whereEqualTo("status", "DL")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            ArrayList <Pet> pets = new ArrayList<>();
+                            for(QueryDocumentSnapshot document :  task.getResult()){
+                                Pet pet = document.toObject(Pet.class);
+                                pets.add(pet);
+                            }
+                            crudPet.showPets(pets);
+                        }else{
+                            crudPet.showMessage("¡Ups! Al parecer la lista está vacia");
+                        }
+                    }
+                });
+    }
+
+    public static void updatePet(Pet petsUpdate) {
+        db.collection("pets")
+                .document(String.valueOf(petsUpdate.getName()))
+                .set(petsUpdate)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            crudPet.showMessage("Animal se actualizó satisfactoriamente.");
+                        }else{
+                            crudPet.showMessage("No se ha podido actualizar al animal.");}
+                    }
+                });
     }
 }

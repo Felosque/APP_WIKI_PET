@@ -6,36 +6,33 @@ import java.util.Date;
 
 public class Pet {
 
-    private int id;
     private String name;
     private Date discoveredDate;
     private String description;
     private double height;
-    private int animalType;
+    private String animalType;
     private int icon;
     private String status;
 
-    public Pet(int id, String name, Date discoveredDate, String description, double height, int animalType) {
+    public Pet(int id, String name, Date discoveredDate, String description, double height, String animalType) {
         this.name = name;
         this.discoveredDate = discoveredDate;
         this.description = description;
         this.height = height;
         this.animalType = animalType;
-        this.id = id;
         this.icon = R.drawable.fault;
     }
 
-    public Pet(String name, Date discoveredDate, String description, double height, int animalType, int pIcon) {
+    public Pet(String name, Date discoveredDate, String description, double height, String animalType, int pIcon) {
         this.name = name;
         this.discoveredDate = discoveredDate;
         this.description = description;
         this.height = height;
         this.animalType = animalType;
-        this.id = id;
         this.icon = pIcon;
     }
 
-    public Pet(String name, Date discoveredDate, String description, double height, int animalType) {
+    public Pet(String name, Date discoveredDate, String description, double height, String animalType) {
         this.name = name;
         this.discoveredDate = discoveredDate;
         this.description = description;
@@ -53,14 +50,6 @@ public class Pet {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -95,11 +84,11 @@ public class Pet {
         this.height = height;
     }
 
-    public int getAnimalType() {
+    public String getAnimalType() {
         return animalType;
     }
 
-    public void setAnimalType(int animalType) {
+    public void setAnimalType(String animalType) {
         this.animalType = animalType;
     }
 
@@ -107,14 +96,4 @@ public class Pet {
 
     public void setIcon(int icon) { this.icon = icon; }
 
-    @Override
-    public String toString() {
-        return "Pet{" +
-                "name='" + name + '\'' +
-                ", discoveredDate='" + discoveredDate + '\'' +
-                ", description='" + description + '\'' +
-                ", height=" + height +
-                ", animalType=" + animalType +
-                '}';
-    }
 }

@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.wikipets.estructural.Pet;
 import com.example.wikipets.estructural.TipoAnimal;
+import com.example.wikipets.interfaces.CRUDPet;
 import com.example.wikipets.servicios.ServicioFuncionalidades;
 import com.example.wikipets.servicios.ServicioPet;
 
@@ -25,13 +26,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class GUIEditar extends AppCompatActivity {
+public class GUIEditar extends AppCompatActivity implements CRUDPet {
 
     //Panel busqueda
     private TextView txtBusqueda;
 
     //Panel Edición
-    private int idMascota;
 
     private TextView nombre;
 
@@ -51,8 +51,6 @@ public class GUIEditar extends AppCompatActivity {
 
     private LinearLayout layoutResultado;
 
-    private ServicioPet servicioPet;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,22 +58,19 @@ public class GUIEditar extends AppCompatActivity {
 
         Intent intent = getIntent();
         String cad = intent.getStringExtra("ANIMAL");
-
-        servicioPet = new ServicioPet(this);
+        ServicioPet.setCrudPet(this);
 
         nombre = (TextView) findViewById(R.id.txtNombre);
         descripcion = (TextView) findViewById(R.id.txtDescripcion);
         fechaDescubrimiento = (TextView) findViewById(R.id.txtFecha);
         altura = (TextView) findViewById(R.id.txtAltura);
         txtBusqueda = findViewById(R.id.txtBusqueda);
-        idMascota = -1;
 
         layoutBusqueda = findViewById(R.id.layoutBusqueda);
         layoutResultado = findViewById(R.id.layoutEdicion);
 
         spnTipo = (Spinner) findViewById(R.id.spTipo);
         ArrayList<String> typeAnimals;
-        TipoAnimal.loadAnimals();
         typeAnimals = TipoAnimal.getTypeAnimal();
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,typeAnimals);
@@ -96,7 +91,7 @@ public class GUIEditar extends AppCompatActivity {
 
     public void btnCancelar_Click(View view){
         txtBusqueda.setText("");
-        visibleResultados(view,false);
+        visibleResultados(false);
     }
 
     public void btnActualizar_Click(View view){
@@ -114,15 +109,12 @@ public class GUIEditar extends AppCompatActivity {
             String textoNombre = nombre.getText().toString();
             String textoDes = descripcion.getText().toString();
             Double textoAltura = Double.parseDouble(altura.getText().toString());
-            Object tipoAnimal = spnTipo.getSelectedItem();
-            Method getAnimalTypeId = TipoAnimal.class.getMethod("getCodigo");
-            Object result = getAnimalTypeId.invoke(tipoAnimal);
-            int textoTipo = Integer.parseInt(result.toString());
+            String textoTipo = spnTipo.getSelectedItem().toString();
 
-            Pet nuevoPet = new Pet(idMascota, textoNombre, textoFecha, textoDes, textoAltura, textoTipo);
-            servicioPet.updatePet(nuevoPet);
-            Toast.makeText(this, "Se actualizó correctamente la mascota ID: " + idMascota, Toast.LENGTH_LONG).show();
-            visibleResultados(view,false);
+            Pet nuevoPet = new Pet(textoNombre, textoFecha, textoDes, textoAltura, textoTipo);
+            nuevoPet.setStatus("AC");
+            ServicioPet.updatePet(nuevoPet);
+            visibleResultados(false);
         }catch (Exception e)
         {
             Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG ).show();
@@ -133,29 +125,13 @@ public class GUIEditar extends AppCompatActivity {
     public void btnBuscar_Click(View view){
         try {
             String textBusqueda = txtBusqueda.getText().toString();
-            Pet busqueda = servicioPet.searchPetsByName(textBusqueda);
-
-            if (busqueda != null) {
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(txtBusqueda.getWindowToken(), 0);
-
-                this.idMascota = busqueda.getId();
-                this.nombre.setText(busqueda.getName());
-                this.nombre.setEnabled(false);
-                this.altura.setText("" + busqueda.getHeight());
-                this.descripcion.setText(busqueda.getDescription());
-                this.fechaDescubrimiento.setText(ServicioFuncionalidades.dateToString(busqueda.getDiscoveredDate()));
-                this.spnTipo.setSelection(ServicioFuncionalidades.getIndexSpinnerValue(spnTipo, String.valueOf(busqueda.getAnimalType())));
-                visibleResultados(view, true);
-            } else {
-                Toast.makeText(this, "No se encontró ninguna mascota.", Toast.LENGTH_LONG).show();
-            }
+            ServicioPet.searchPetsByName(textBusqueda);
         }catch (Exception e){
 
         }
     }
 
-    private void visibleResultados(View view, boolean pMostrar){
+    private void visibleResultados(boolean pMostrar){
         if (pMostrar){
             layoutBusqueda.setVisibility(View.GONE);
             layoutResultado.setVisibility(View.VISIBLE);
@@ -181,4 +157,29 @@ public class GUIEditar extends AppCompatActivity {
         dpd.show();
     }
 
+    @Override
+    public void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showPets(ArrayList<Pet> pets) {
+
+    }
+
+    @Override
+    public void showOnePet(Pet pet) {
+        if (pet != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(txtBusqueda.getWindowToken(), 0);
+
+            this.nombre.setText(pet.getName());
+            this.nombre.setEnabled(false);
+            this.altura.setText("" + pet.getHeight());
+            this.descripcion.setText(pet.getDescription());
+            this.fechaDescubrimiento.setText(ServicioFuncionalidades.dateToString(pet.getDiscoveredDate()));
+            this.spnTipo.setSelection(ServicioFuncionalidades.getIndexSpinnerValue(spnTipo, String.valueOf(pet.getAnimalType())));
+            visibleResultados(true);
+        }
+    }
 }

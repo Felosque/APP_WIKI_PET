@@ -5,18 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
-
-import com.example.wikipets.estructural.Pet;
-import com.example.wikipets.estructural.TipoAnimal;
-import com.example.wikipets.servicios.ServicioFuncionalidades;
-import com.example.wikipets.servicios.ServicioPersistencia;
-import com.example.wikipets.servicios.ServicioPet;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -18,12 +18,13 @@ import android.widget.Toast;
 
 import com.example.wikipets.estructural.Pet;
 import com.example.wikipets.estructural.TipoAnimal;
+import com.example.wikipets.interfaces.CRUDPet;
 import com.example.wikipets.servicios.ServicioFuncionalidades;
 import com.example.wikipets.servicios.ServicioPet;
 
 import java.util.ArrayList;
 
-public class GUIDetalles extends AppCompatActivity {
+public class GUIDetalles extends AppCompatActivity implements CRUDPet {
 
     private ImageView imgDetalle;
 
@@ -80,7 +81,7 @@ public class GUIDetalles extends AppCompatActivity {
             Intent intent = getIntent();
             int cad = intent.getIntExtra("ANIMAL", -1);
             ServicioPet servicioPet = new ServicioPet(this);
-            animal = servicioPet.searchPetsByIDArray(cad);
+            animal = null;
 
 
             imgDetalle = (ImageView) findViewById(R.id.imgDetalle);
@@ -104,7 +105,6 @@ public class GUIDetalles extends AppCompatActivity {
 
             spnTipo = (Spinner) findViewById(R.id.spTipo);
             ArrayList<String> typeAnimals;
-            TipoAnimal.loadAnimals();
             typeAnimals = TipoAnimal.getTypeAnimal();
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,typeAnimals);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -132,5 +132,20 @@ public class GUIDetalles extends AppCompatActivity {
 
     public void btnVolver_Click (View view) {
         finish();
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showPets(ArrayList<Pet> pets) {
+
+    }
+
+    @Override
+    public void showOnePet(Pet pet) {
+
     }
 }
