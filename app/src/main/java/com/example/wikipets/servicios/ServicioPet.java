@@ -63,7 +63,7 @@ public class ServicioPet {
                 });
     }
 
-    public void deletePetLogic(String name){
+    public static void deletePetLogic(String name){
         db.collection("pets")
                 .document(String.valueOf(name))
                 .update("status", "DL")
@@ -79,14 +79,33 @@ public class ServicioPet {
     }
 
     public static void searchPetsByName(String name) {
-        DocumentReference docRef = db.collection("pets").document(name);
+        /*DocumentReference docRef = db.collection("pets").document(name);
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Pet pet = documentSnapshot.toObject(Pet.class);
                 crudPet.showOnePet(pet);
             }
-        });
+        });*/
+
+        db.collection("pets")
+                .whereEqualTo("status", "AC")
+                .whereEqualTo("name", name)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            Pet pet = null;
+                            for(QueryDocumentSnapshot document :  task.getResult()){
+                                pet = document.toObject(Pet.class);
+                            }
+                            crudPet.showOnePet(pet);
+                        }else{
+                            crudPet.showMessage("¡Ups! Al parecer la lista está vacia");
+                        }
+                    }
+                });
     }
 
     public static void getQuantityPet(int pType) {

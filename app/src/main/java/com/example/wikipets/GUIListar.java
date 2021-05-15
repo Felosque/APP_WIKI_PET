@@ -31,7 +31,7 @@ public class GUIListar extends AppCompatActivity implements CRUDPet {
     private ListView listaPets;
 
     private Button btnListar;
-    private int statusBtn = 0;
+    private int statusBtn = 1;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -43,7 +43,7 @@ public class GUIListar extends AppCompatActivity implements CRUDPet {
         ServicioPet.setCrudPet(this);
 
         btnListar = (Button) findViewById(R.id.btnListar);
-        btnListar.setText("Listar Eliminados");
+        btnListar.setText("Listar Mascotas Eliminadas");
         listaPets = (ListView) findViewById(R.id.lstListaAnimales);
 
         AdaptadorPet adaptadorPet = null;
@@ -56,7 +56,7 @@ public class GUIListar extends AppCompatActivity implements CRUDPet {
         listaPets.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                detallesAnimal(i);
+                //detallesAnimal(i);
             }
         });
 
@@ -83,7 +83,7 @@ public class GUIListar extends AppCompatActivity implements CRUDPet {
     @Override
     protected void onResume() {
         super.onResume();
-        if (statusBtn == 0){
+        /*if (statusBtn == 0){
             btnListar.setText("Listar Mascotas Activas");
             statusBtn = 1;
             ServicioPet.getPetsByStatus();
@@ -92,7 +92,7 @@ public class GUIListar extends AppCompatActivity implements CRUDPet {
             btnListar.setText("Listar Mascotas Eliminadas");
             statusBtn = 0;
             ServicioPet.getPets();
-        }
+        }*/
     }
 
     private void detallesAnimal(int idMascotaArray){
@@ -103,13 +103,9 @@ public class GUIListar extends AppCompatActivity implements CRUDPet {
 
     public void btnListar_Click (View view){
         if (statusBtn == 0){
-            btnListar.setText("Listar Mascotas Activas");
-            statusBtn = 1;
             ServicioPet.getPetsByStatus();
         }
         else{
-            btnListar.setText("Listar Mascotas Eliminadas");
-            statusBtn = 0;
             ServicioPet.getPets();
         }
     }
