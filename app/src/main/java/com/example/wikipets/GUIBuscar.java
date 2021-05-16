@@ -18,6 +18,7 @@ import com.example.wikipets.estructural.TipoAnimal;
 import com.example.wikipets.interfaces.CRUDPet;
 import com.example.wikipets.servicios.ServicioFuncionalidades;
 import com.example.wikipets.servicios.ServicioPet;
+import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -115,6 +116,8 @@ public class GUIBuscar extends AppCompatActivity implements CRUDPet {
 
             btnFecha = (ImageButton) findViewById(R.id.btnFechaForm);
             btnFecha.setVisibility(View.GONE);
+        }else{
+            Toast.makeText(this, "No existe el animal: " + txtCodigo.getText().toString(),Toast.LENGTH_LONG).show();
         }
     }
 
