@@ -116,7 +116,8 @@ public class GUIBuscar extends AppCompatActivity implements CRUDPet {
 
             btnFecha = (ImageButton) findViewById(R.id.btnFechaForm);
             btnFecha.setVisibility(View.GONE);
-        }else{
+        }
+        else{
             Toast.makeText(this, "No existe el animal: " + txtCodigo.getText().toString(),Toast.LENGTH_LONG).show();
         }
     }
