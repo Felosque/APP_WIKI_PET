@@ -25,6 +25,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 
 public class GUIEditar extends AppCompatActivity implements CRUDPet {
 
@@ -181,5 +182,10 @@ public class GUIEditar extends AppCompatActivity implements CRUDPet {
             this.spnTipo.setSelection(ServicioFuncionalidades.getIndexSpinnerValue(spnTipo, String.valueOf(pet.getAnimalType())));
             visibleResultados(true);
         }
+    }
+
+    @Override
+    public void petByType(Map<String, Integer> pet) {
+
     }
 }

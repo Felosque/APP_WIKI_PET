@@ -108,12 +108,42 @@ public class ServicioPet {
                 });
     }
 
-    public static void getQuantityPet(int pType) {
-
+    private static int getQuantityPet(ArrayList<Pet> petsuwus, String tipoAnimal) {
+        int count = 0;
+        for(Pet uwu: petsuwus){
+            if(uwu.getAnimalType().equals(tipoAnimal)){
+                count++;
+            }
+        }
+        return count;
     }
 
-    public static void getQuantityPetsOfType() {
-
+    public static void getQuantityPetsOfType() throws Exception{
+        db.collection("pets")
+                .whereEqualTo("status", "AC")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            ArrayList <Pet> pets = new ArrayList<>();
+                            for(QueryDocumentSnapshot document :  task.getResult()){
+                                Pet pet = document.toObject(Pet.class);
+                                pets.add(pet);
+                            }
+                            pets.size();
+                            ArrayList<String> animales = TipoAnimal.getTypeAnimal();
+                            Map<String, Integer> typeAmountMap = new HashMap<>();
+                            for(String uwu: animales){
+                                int count = getQuantityPet(pets,uwu);
+                                typeAmountMap.put(uwu,count);
+                            }
+                            crudPet.petByType(typeAmountMap);
+                        }else{
+                            crudPet.showMessage("¡Ups! Al parecer la lista está vacia");
+                        }
+                    }
+                });
     }
 
     public static void getPets() {

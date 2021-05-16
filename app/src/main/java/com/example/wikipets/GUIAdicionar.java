@@ -21,6 +21,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 
 public class GUIAdicionar extends AppCompatActivity implements CRUDPet {
 
@@ -130,6 +131,11 @@ public class GUIAdicionar extends AppCompatActivity implements CRUDPet {
 
     @Override
     public void showOnePet(Pet pet) {
+
+    }
+
+    @Override
+    public void petByType(Map<String, Integer> pet) {
 
     }
 }

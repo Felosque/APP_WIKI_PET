@@ -23,6 +23,7 @@ import com.example.wikipets.servicios.ServicioFuncionalidades;
 import com.example.wikipets.servicios.ServicioPet;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class GUIListar extends AppCompatActivity implements CRUDPet {
 
@@ -149,6 +150,11 @@ public class GUIListar extends AppCompatActivity implements CRUDPet {
 
     @Override
     public void showOnePet(Pet pet) {
+
+    }
+
+    @Override
+    public void petByType(Map<String, Integer> pet) {
 
     }
 }

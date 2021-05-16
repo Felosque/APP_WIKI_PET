@@ -20,6 +20,7 @@ import com.example.wikipets.servicios.ServicioFuncionalidades;
 import com.example.wikipets.servicios.ServicioPet;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class GUIBuscar extends AppCompatActivity implements CRUDPet {
 
@@ -115,5 +116,10 @@ public class GUIBuscar extends AppCompatActivity implements CRUDPet {
             btnFecha = (ImageButton) findViewById(R.id.btnFechaForm);
             btnFecha.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void petByType(Map<String, Integer> pet) {
+
     }
 }
