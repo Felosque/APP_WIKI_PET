@@ -34,18 +34,23 @@ public class ServicioPet {
     }
 
     public static void addPets(Pet pet) {
-        db.collection("pets")
-                .document(String.valueOf(pet.getName()))
-                .set(pet)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            crudPet.showMessage("Animal añadido satisfactoriamente.");
-                        }else{
-                            crudPet.showMessage("No se ha podido añadir al animal.");}
-                    }
-                });
+        try {
+            db.collection("pets")
+                    .document(String.valueOf(pet.getName()))
+                    .set(pet)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                crudPet.showMessage("Animal añadido satisfactoriamente.");
+                            } else {
+                                crudPet.showMessage("No se ha podido añadir al animal.");
+                            }
+                        }
+                    });
+        }catch (Exception e){
+            e.getMessage();
+        }
     }
 
     public static void deletePet(String name){
